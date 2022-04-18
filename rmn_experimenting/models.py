@@ -28,6 +28,7 @@ class Customer(SQLModel, table=True):
     #phone: str
     #address: str
     #start: date
+    #
 
 
 class Employee(SQLModel, table=True):
