@@ -22,13 +22,18 @@ class Customer(SQLModel, table=True):
     gender: str
     #DOB: date
     creditScore: int
-    #employer: str
-    #title: str
-    #supervisor: str
-    #phone: str
-    #address: str
-    #start: date
-    #
+
+
+class employmentInfo(SQLModel, table=True):
+    employmentID: Optional[int] = Field(primary_key=True)
+    employerName: str
+    jobTitle: str
+    supervisorName: str
+    supervisorPhone: str
+    employmentAddress: str
+    #employmentStartDate: date
+    customerID: int
+
 
 
 class Employee(SQLModel, table=True):
@@ -63,6 +68,17 @@ class PurchasedCar(SQLModel, table=True):
     miles: int
     #book_price: double
     #price_paid: double
+
+
+
+class carProblems(SQLModel, table=True):
+    problemID: Optional[int] = Field(primary_key=True)
+    problem_description: str
+    est_repair_cost: int
+    # actual_cost: double
+    VIN: int
+    car_problem_number: int
+
 
 
 class Purchaser(SQLModel, table=True):
@@ -103,9 +119,17 @@ class SoldCar(SQLModel, table=True):
     warranty_ID: int
 
 
-class Warranty(SQLModel, table=True):
+class soldWarranty(SQLModel, table=True):
     warranty_ID: Optional[int] = Field(primary_key=True)
     co_signer: str
     #warranty_sale_date: Date
     #total_cost: double
     #monthly_cost: double
+    customer_warranty_number: int
+    #warranty_start_date: date
+    warranty_length: str
+    warranty_cost: int
+    warranty_deductible: int
+    items_covered: str
+    VIN: int
+    customerID: int
