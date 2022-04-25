@@ -58,6 +58,14 @@ async def get_all_purchasedCars():
     results=session.exec(statement).all()
     return results
 
+
+@app.get("/purchasedCarsRequest", response_class=HTMLResponse)
+def get_all_purchasedCarsRequest(request: Request):
+    statement=select(PurchasedCar)
+    results=session.exec(statement).all()
+    return templates.TemplateResponse("allPurchasedCarsOutput.html", {"request": request, "results": results})
+
+
 @app.get("/purchaser", response_model=List[Purchaser])
 async def get_all_purchasers():
     statement=select(Purchaser)
@@ -113,22 +121,22 @@ def create_bank(request: Request, bankAcct: int = Form(...), due: float = Form(.
 
 
 @app.post("/createCarSale", response_class=HTMLResponse)
-def create_carSale(request: Request, empID: int = Form(...), e_first_name: str = Form(...), e_last_name: str = Form(...), e_phone: str = Form(...), customer_ID: int = Form(...), c_phone: str = Form(...), c_last_name: str = Form(...), c_first_name: str = Form(...), city: str = Form(...), state: str = Form(...), zip: int = Form(...), gender: str = Form(...), creditScore: int = Form(...), VIN: int = Form(...), miles: int = Form(...), condition: str = Form(...), style: str = Form(...), interior_color: str = Form(...), employerName: str = Form(...), jobTitle: str = Form(...), supervisorName: str = Form(...), supervisorPhone: str = Form(...), employmentAddress: str = Form(...)):
-    print("empID :" + str(empID) + ", e_first_name:" + str(e_first_name) + ", e_last_name:" + str(e_last_name) + "e_phone:" + str(e_phone) + ", customer_ID:" + str(customer_ID) + ", c_phone:" + str(c_phone) + "c_last_name :" + str(c_last_name) + ", c_first_name:" + str(c_first_name) + ", city:" + str(city) + ", state:" + str(state) + ", ZIP :" + str(zip) + ", gender:" + str(gender) + "creditScore :" + str(creditScore) + ", VIN :" + str(VIN) + ", miles:" + str(miles) + "condition :" + str(condition) + ", style :" + str(style) + ", interior_color:" + str(interior_color))
+def create_carSale(request: Request, date: str = Form(...), empID: int = Form(...), e_first_name: str = Form(...), e_last_name: str = Form(...), e_phone: str = Form(...), customer_ID: int = Form(...), c_phone: str = Form(...), c_last_name: str = Form(...), c_first_name: str = Form(...), city: str = Form(...), state: str = Form(...), zip: int = Form(...), gender: str = Form(...), creditScore: int = Form(...), VIN: int = Form(...), miles: int = Form(...), condition: str = Form(...), style: str = Form(...), interior_color: str = Form(...), employerName: str = Form(...), jobTitle: str = Form(...), supervisorName: str = Form(...), supervisorPhone: str = Form(...), employmentAddress: str = Form(...)):
+    print("date: " + str(date) + "empID :" + str(empID) + ", e_first_name:" + str(e_first_name) + ", e_last_name:" + str(e_last_name) + "e_phone:" + str(e_phone) + ", customer_ID:" + str(customer_ID) + ", c_phone:" + str(c_phone) + "c_last_name :" + str(c_last_name) + ", c_first_name:" + str(c_first_name) + ", city:" + str(city) + ", state:" + str(state) + ", ZIP :" + str(zip) + ", gender:" + str(gender) + "creditScore :" + str(creditScore) + ", VIN :" + str(VIN) + ", miles:" + str(miles) + "condition :" + str(condition) + ", style :" + str(style) + ", interior_color:" + str(interior_color))
     saleIDQuery = session.query(func.max(Sale.sale_ID)).first()
     new_saleID: int = 0
     for saleID in saleIDQuery:
         new_saleID = saleID + 1
         print(new_saleID)
     print(new_saleID)
-    new_sale = Sale(sale_ID=new_saleID, employee_ID=empID)
+    new_sale = Sale(date=date, sale_ID=new_saleID, employee_ID=empID)
 
     empIDQuery = session.query(func.max(employmentInfo.employmentID)).first()
     new_empID: int = 0
-    for empID in empIDQuery:
-        new_empID = empID + 1
+    for employeeID in empIDQuery:
+        new_empID = employeeID + 1
         print(new_empID)
-    print(new_empID)
+    print("new_empID is: " + str(new_empID))
     new_employmentInfo = employmentInfo(employmentID=new_empID, employerName=employerName, jobTitle=jobTitle, supervisorName=supervisorName, supervisorPhone=supervisorPhone, employmentAddress=employmentAddress, customerID=customer_ID)
 
     purchasedCar = select(PurchasedCar).where(PurchasedCar.VIN == VIN)
@@ -137,17 +145,25 @@ def create_carSale(request: Request, empID: int = Form(...), e_first_name: str =
     print("pCarResult: " + str(pCarResult))
     print("pCarVIN: " + str(pCarVIN))
 
+
+
     statement = select(Employee).where(Employee.empID == empID)
     result = session.exec(statement).first()
+    print("Found: empID" + str(result.empID))
+    print("Found: customer_ID" + str(result.customer_ID))
     print("Found employee is: " + str(result))
-    result.customer_ID = customer_ID
+    if result.customer_ID is not None:
+        result.customer_ID = customer_ID
+    else:
+        print("No previous customerID")
     print("Updated employee is: + " + str(result))
-    new_customer = Customer(customer_ID=customer_ID, c_phone=c_phone, c_last_name=c_last_name, c_first_name=c_first_name, city=city, state=state, zip=zip, gender=gender, creditScore=creditScore)
+    new_customer = Customer(customer_ID=customer_ID, phone=c_phone, last_name=c_last_name, first_name=c_first_name, city=city, state=state, zip=zip, gender=gender, creditScore=creditScore)
     print("New customer is: " + str(new_customer))
     new_soldcar = SoldCar(customer_ID=customer_ID, VIN=pCarVIN, miles=miles, condition=condition, style=style, interior_color=interior_color)
     #new_soldcar.VIN = pCarResult.VIN
     print("New sold car is: " + str(new_soldcar))
     session.add(new_sale)
+    print("New Sale is: " + str(new_sale))
     #session.add(new_employee)
     session.add(result)
     session.add(new_customer)
@@ -156,7 +172,7 @@ def create_carSale(request: Request, empID: int = Form(...), e_first_name: str =
     print("New employmentInfo: " + str(new_employmentInfo))
     session.commit()
 
-    saleResults = select(Sale).where(Sale.sale_ID == saleID)
+    saleResults = select(Sale).where(Sale.sale_ID == new_saleID)
     results1 = session.exec(saleResults).first()
 
     employeeResults = select(Employee).where(Employee.empID == empID)
@@ -174,8 +190,38 @@ def create_carSale(request: Request, empID: int = Form(...), e_first_name: str =
 
 
 @app.post("/createWarrantySale", response_class=HTMLResponse)
-def create_warranty():
-    pass
+def create_warranty(request: Request, VIN: int = Form(...), customer_ID: int = Form(...), co_signer: str = Form(...), total_cost: int = Form(...), monthly_cost: int = Form(...), salesperson: str = Form(...), phone: str = Form(...), warranty_number: int = Form(...), length: str = Form(...), cost: int = Form(...), deductible: int = Form(...), items_covered: str = Form(...)):
+    print("VIN :" + str(VIN) + ", customer_ID:" + str(customer_ID) + ", co_signer:" + str(
+        co_signer) + "total_cost:" + str(total_cost) + ", customer_ID:" + str(customer_ID) + ", monthly_cost:" + str(monthly_cost) + ", salesperson:" + str(
+        salesperson) + ", phone:" + str(phone) + ", warranty_number :" + str(warranty_number) + ", length:" + str(length) + "cost :" + str(
+        cost) + ", deductible :" + str(deductible) + ", items_covered:" + str(items_covered))
+
+    soldWarrantyQuery = session.query(func.max(soldWarranty.warranty_ID)).first()
+    new_soldWarrantyID: int = 0
+    for soldWarrantyID in soldWarrantyQuery:
+        new_soldWarrantyID = soldWarrantyID + 1
+        print(new_soldWarrantyID)
+    print(new_soldWarrantyID)
+
+    statement = select(SoldCar).where(SoldCar.VIN == VIN)
+    result = session.exec(statement).first()
+    print("Found Sold Car is: " + str(result))
+    new_VIN = result.VIN
+
+    statement2 = select(Customer).where(Customer.customer_ID == customer_ID)
+    result2 = session.exec(statement2).first()
+    print("Found Customer is: " + str(result2))
+    new_customer_ID = result2.customer_ID
+
+    new_soldwarranty = soldWarranty(warranty_ID=new_soldWarrantyID, co_signer=co_signer, total_cost=total_cost, monthly_cost=monthly_cost, customer_warranty_number=warranty_number, warranty_length=length, warranty_cost=cost, warranty_deductible=deductible, items_covered=items_covered, VIN=new_VIN, customerID=new_customer_ID)
+
+    print("Newly created Warranty: " + str(new_soldwarranty))
+
+    session.add(new_soldwarranty)
+    session.commit()
+
+    return templates.TemplateResponse("soldWarrantyOutput.html",
+                                      {"request": request, "results1": new_soldwarranty})
 
 
 @app.post("/getBank", response_class=HTMLResponse)
@@ -216,7 +262,9 @@ def create_bank(request: Request, taxID: int = Form(...), location: str = Form(.
     session.add(new_carProblems)
     session.commit()
     print("Successfully made new purchase and purchasedCar and carProblems!")
-    return new_purchaser, new_purchasedCar, new_carProblems
+    return templates.TemplateResponse("carPurchaseOutput.html",
+                                      {"request": request, "results1": new_purchaser, "results2": new_purchasedCar,
+                                       "results3": new_carProblems})
 
 
 @app.get("/createBankForm", response_class=HTMLResponse)
@@ -235,6 +283,20 @@ def formOne_page(request: Request):
 @app.get("/createForm2", response_class=HTMLResponse)
 def formTwo_page(request: Request):
     return templates.TemplateResponse("Car-Sale-Form.html", {"request": request})
+
+
+@app.get("/createForm3", response_class=HTMLResponse)
+def formTwo_page(request: Request):
+    return templates.TemplateResponse("warrantyForm.html", {"request": request})
+
+
+
+@app.get("/createReport1", response_class=HTMLResponse)
+def formTwo_page(request: Request):
+    return templates.TemplateResponse("all-purchased-cars-report.html", {"request": request})
+
+
+
 
 
 @app.post("/customers", response_model=Customer,
@@ -367,6 +429,8 @@ async def update_a_employee(empID: int, employee: Employee):
     result.customer_ID = employee.customer_ID
     session.commit()
     return result
+
+
 
 
 

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>TEST</title>
+</head>
+<body>
+<h1> Created Car Purchase Info: </h1>
+
+    <table cellspacing="3" border="1" style="width:100%">
+        <tr>
+            <th>Purchase Results</th>
+
+            <tr>
+                <td> TaxID: {{results1.taxID}}</td>
+                <td> Location: {{results1.location}}</td>
+                <td> Auction: {{results1.auction}}</td>
+                <td> Seller/Dealer: {{results1.seller_dealer}}</td>
+            </tr>
+
+        </tr>
+    </table>
+
+
+    <table cellspacing="3" border="1" style="width:100%">
+        <tr>
+            <th>Purchased Car Results</th>
+            <tr>
+                <td> VIN: {{results2.VIN}}</td>
+                <td> Make: {{results2.make}}</td>
+                <td> Model: {{results2.model}}</td>
+                <td> Year: {{results2.year}}</td>
+                <td> Color: {{results2.color}}</td>
+                <td> Miles: {{results2.miles}}</td>
+            </tr>
+        </tr>
+    </table>
+
+
+    <table cellspacing="3" border="1" style="width:100%">
+        <tr>
+            <th>Car Problems</th>
+            <tr>
+                <td> ProblemID: {{results3.problemID}}</td>
+                <td> Problem Description: {{results3.problem_description}}</td>
+                <td> Estimated Repair Cost: {{results3.est_repair_cost}}</td>
+            </tr>
+        </tr>
+    </table>
+
+
+</body>
+</html>

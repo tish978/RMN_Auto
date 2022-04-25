@@ -7,22 +7,64 @@
 <body>
 <h1> Created Car Sale Info: </h1>
 
+    <table cellspacing="3" border="1" style="width:100%">
+        <tr>
+            <th>Sale Results</th>
 
-    <tr>
-        <td> {{results1}} </td>
-    </tr>
+            <tr>
+                <td> SaleID: {{results1.sale_ID}}</td>
+                <td> Date: {{results1.date}}</td>
+                <td> EmployeeID: {{results1.employee_ID}}</td>
+            </tr>
 
-    <tr>
-        <td> {{results2}} </td>
-    </tr>
+        </tr>
+    </table>
 
-    <tr>
-        <td> {{results3}} </td>
-    </tr>
 
-    <tr>
-        <td> {{results4}} </td>
-    </tr>
+
+    <table cellspacing="3" border="1" style="width:100%">
+        <tr>
+            <th>Employee Results</th>
+            <tr>
+                <td> EmployeeID: {{results2.empID}}</td>
+                <td> First Name: {{results2.first_name}}</td>
+                <td> Last Name: {{results2.last_name}}</td>
+            </tr>
+        </tr>
+    </table>
+
+
+    <table cellspacing="3" border="1" style="width:100%">
+        <tr>
+            <th>Customer Results</th>
+            <tr>
+                <td> CustomerID: {{results3.customer_ID}}</td>
+                <td> Phone: {{results3.phone}}</td>
+                <td> First Name: {{results3.first_name}}</td>
+                <td> Last Name: {{results3.last_name}}</td>
+                <td> City: {{results3.city}}</td>
+                <td> State: {{results3.state}}</td>
+                <td> Zip: {{results3.zip}}</td>
+                <td> Gender: {{results3.gender}}</td>
+                <td> Credit Score: {{results3.creditScore}}</td>
+            </tr>
+        </tr>
+    </table>
+
+
+    <table cellspacing="3" border="1" style="width:100%">
+        <tr>
+            <th>Sold Car Results</th>
+            <tr>
+                <td> CustomerID: {{results4.customer_ID}}</td>
+                <td> VIN: {{results4.VIN}}</td>
+                <td> Miles: {{results4.miles}}</td>
+                <td> Condition: {{results4.condition}}</td>
+                <td> Style: {{results4.style}}</td>
+                <td> Interior Color: {{results4.interior_color}}</td>
+            </tr>
+        </tr>
+    </table>
 
 </body>
 </html>

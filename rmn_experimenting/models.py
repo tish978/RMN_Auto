@@ -95,7 +95,7 @@ class Sale(SQLModel, table=True):
     #total_price: double
     #down_payment: double
     #financed_amount: double
-    #date: date
+    date: str
     employee_ID: int
 
 
@@ -122,11 +122,11 @@ class SoldCar(SQLModel, table=True):
 class soldWarranty(SQLModel, table=True):
     warranty_ID: Optional[int] = Field(primary_key=True)
     co_signer: str
-    #warranty_sale_date: Date
-    #total_cost: double
-    #monthly_cost: double
+    warranty_sale_date: date
+    total_cost: int
+    monthly_cost: int
     customer_warranty_number: int
-    #warranty_start_date: date
+    warranty_start_date: date
     warranty_length: str
     warranty_cost: int
     warranty_deductible: int

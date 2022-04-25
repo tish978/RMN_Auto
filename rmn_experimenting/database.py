@@ -5,8 +5,8 @@ import main
 import models
 from sqlalchemy import create_engine, MetaData
 
-engine = create_engine("mysql+pymysql://testuser:RMN123@192.168.1.84:3306/rmn_records", echo=True)
-
+#engine = create_engine("mysql+pymysql://testuser:RMN123@192.168.1.84:3306/rmn_records", echo=True)
+engine = create_engine("mysql+pymysql://testuser:RMN123@192.168.254.130:3306/rmn_records", echo=True)
 
 def createBank(bankAcct : int, due : float, amount : float):
     new_bank = models.Bank()
