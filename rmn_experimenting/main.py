@@ -34,6 +34,24 @@ async def get_all_customers():
     results=session.exec(statement).all()
     return results
 
+
+
+@app.get("/paymentHistories2", response_model=List[PaymentHistory])
+async def get_all_customers(customer_ID: Optional[int] = None):
+    statement = select(Customer).where(Customer.customer_ID == customer_ID).having(Customer.taxpayerID)
+    print("Statement: " + str(statement))
+    results = session.exec(statement).all()
+    print("Results: " + str(results))
+
+    customerTaxID = results[0].taxpayerID
+    print("CustomerTaxID: " + str(customerTaxID))
+
+    statement2 = select(PaymentHistory).where(PaymentHistory.taxpayerID == customerTaxID)
+    results2 = session.exec(statement2).all()
+
+    return results2
+
+
 @app.get("/employees", response_model=List[Employee])
 async def get_all_employees():
     statement=select(Employee)
@@ -59,11 +77,133 @@ async def get_all_purchasedCars():
     return results
 
 
-@app.get("/purchasedCarsRequest", response_class=HTMLResponse)
-def get_all_purchasedCarsRequest(request: Request):
-    statement=select(PurchasedCar)
-    results=session.exec(statement).all()
+@app.post("/purchasedCarsRequest", response_class=HTMLResponse)
+async def get_all_purchasedCarsRequest(request: Request, make: Optional[str] = None):
+    #statement=select(PurchasedCar).where(PurchasedCar.make == make)
+
+    if make:
+        print(make)
+        statement = select(PurchasedCar).where(PurchasedCar.make == make)
+        print(statement)
+        results=session.exec(statement).all()
+        print(results)
+
+        return templates.TemplateResponse("allPurchasedCarsOutput.html", {"request": request, "results": results})
+    else:
+        statement = select(PurchasedCar)
+        print(statement)
+        results = session.exec(statement).all()
+        print(results)
+
+        return templates.TemplateResponse("allPurchasedCarsOutput.html", {"request": request, "results": results})
+
+@app.post("/getAllPaymentHistories", response_class=HTMLResponse)
+async def get_all_paymentHistories(request: Request, customer_ID: Optional[int] = None):
+    #statement=select(PurchasedCar).where(PurchasedCar.make == make)
+
+    if customer_ID:
+        print(customer_ID)
+        statement = select(Customer).where(Customer.customer_ID == customer_ID)
+        taxpayerID = select(PaymentHistory).where(statement.having(Customer.taxpayerID))
+        print("TaxpayerID is: " + str(taxpayerID))
+        print(statement)
+        results=session.exec(statement).all()
+        print(results)
+
+        return templates.TemplateResponse("allPaymentHistoriesOutput.html", {"request": request, "results": results})
+    else:
+        statement = select(PaymentHistory)
+        print(statement)
+        results = session.exec(statement).all()
+        print(results)
+
+        return templates.TemplateResponse("allPaymentHistoriesOutput.html", {"request": request, "results": results})
+
+
+@app.post("/getAllSoldCars", response_class=HTMLResponse)
+async def get_all_soldCarsRequest(request: Request, customer_ID: Optional[int] = None):
+    #statement=select(PurchasedCar).where(PurchasedCar.make == make)
+
+    if customer_ID:
+        print(customer_ID)
+        statement = select(SoldCar).where(SoldCar.customer_ID == customer_ID)
+        print(statement)
+        results=session.exec(statement).all()
+        print(results)
+
+        return templates.TemplateResponse("allSoldCarsOutput.html", {"request": request, "results": results})
+    else:
+        statement = select(SoldCar)
+        print(statement)
+        results = session.exec(statement).all()
+        print(results)
+
+        return templates.TemplateResponse("allSoldCarsOutput.html", {"request": request, "results": results})
+
+
+
+@app.post("/getAllSoldWarranties", response_class=HTMLResponse)
+async def get_all_getAllSoldWarranties(request: Request, customerID: Optional[int] = None):
+    #statement=select(PurchasedCar).where(PurchasedCar.make == make)
+
+    if customerID:
+        print(customerID)
+        statement = select(soldWarranty).where(soldWarranty.customerID == customerID)
+        print(statement)
+        results=session.exec(statement).all()
+        print(results)
+
+        return templates.TemplateResponse("allSoldWarrantiesOutput.html", {"request": request, "results": results})
+    else:
+        statement = select(soldWarranty)
+        print(statement)
+        results = session.exec(statement).all()
+        print(results)
+
+        return templates.TemplateResponse("allSoldWarrantiesOutput.html", {"request": request, "results": results})
+
+
+
+@app.post("/getCreditScores", response_class=HTMLResponse)
+async def get_all_creditScores(request: Request, customer_ID: Optional[int] = None):
+    #statement=select(PurchasedCar).where(PurchasedCar.make == make)
+
+    if customer_ID:
+        print(customer_ID)
+        statement = select(Customer).where(Customer.customer_ID == customer_ID)
+        print(statement)
+        results=session.exec(statement).all()
+        print(results)
+
+        return templates.TemplateResponse("allCreditScoresOutput.html", {"request": request, "results": results})
+    else:
+        statement = select(Customer)
+        print(statement)
+        results = session.exec(statement).all()
+        print(results)
+
+        return templates.TemplateResponse("allCreditScoresOutput.html", {"request": request, "results": results})
+
+
+
+
+@app.route("/purchasedCarsRequest2", methods=['GET', 'POST', 'PUT'])
+def get_all_purchasedCarsRequest(request: Request, make: str = None):
+    statement=select(PurchasedCar).where(PurchasedCar.make == make)
+    print(statement)
+    results=session.exec(statement).fetchall()
+    print(results)
+    session.commit()
     return templates.TemplateResponse("allPurchasedCarsOutput.html", {"request": request, "results": results})
+
+
+#@app.get("/purchasedCarsRequest?make=Tesla", response_class=HTMLResponse)
+#def get_all_purchasedCarsRequest(request: Request, make: str = Form(...)):
+    #statement=select(PurchasedCar).where(PurchasedCar.make == make)
+    #print(statement)
+    #results=session.exec(statement).all()
+    #print(results)
+    #return templates.TemplateResponse("allPurchasedCarsOutput.html", {"request": request, "results": results})
 
 
 @app.get("/purchaser", response_model=List[Purchaser])
@@ -296,6 +436,25 @@ def formTwo_page(request: Request):
     return templates.TemplateResponse("all-purchased-cars-report.html", {"request": request})
 
 
+
+@app.get("/createReport2", response_class=HTMLResponse)
+def formTwo_page(request: Request):
+    return templates.TemplateResponse("all-payment-histories-report.html", {"request": request})
+
+@app.get("/createReport3", response_class=HTMLResponse)
+def formTwo_page(request: Request):
+    return templates.TemplateResponse("all-sold-cars-report.html", {"request": request})
+
+
+@app.get("/createReport4", response_class=HTMLResponse)
+def formTwo_page(request: Request):
+    return templates.TemplateResponse("all-payment-histories-report.html", {"request": request})
+
+
+
+@app.get("/createReport5", response_class=HTMLResponse)
+def formTwo_page(request: Request):
+    return templates.TemplateResponse("all-payment-histories-report.html", {"request": request})
 
 
 

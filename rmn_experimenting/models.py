@@ -22,6 +22,7 @@ class Customer(SQLModel, table=True):
     gender: str
     #DOB: date
     creditScore: int
+    taxpayerID: int
 
 
 class employmentInfo(SQLModel, table=True):
@@ -54,14 +55,14 @@ class ItemsCovered(SQLModel, table=True):
 
 class PaymentHistory(SQLModel, table=True):
     taxpayerID: Optional[int] = Field(primary_key=True)
-    number_late_payments: int
-    average_number_days_late: int
-    bank: int
+    number_late_payments: Optional[int]
+    average_number_days_late: Optional[int]
+    bank: Optional[int]
 
 
 class PurchasedCar(SQLModel, table=True):
     VIN: Optional[int] = Field(primary_key=True)
-    make: str
+    make: Optional[str]
     model: str
     year: str
     color: str
