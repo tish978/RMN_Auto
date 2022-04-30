@@ -1,0 +1,33 @@
+<html>
+<head>
+    <title>Payment History Details</title>
+
+</head>
+<body>
+    <h1> Form 4 Draft </h1>
+        <form action="http://127.0.0.1:8000/createPaymentHistory" method="post">
+                <div class="mb-3">
+                    <label for="taxpayerID" class="form-label">Taxpayer ID</label>
+                    <input type="text" class="form-control" id="taxpayerID"  name="taxpayerID" placeholder="Taxpayer ID">
+                </div>
+                <div class="mb-3">
+                    <label for="number_late_payments" class="form-label">Number of Late Payments</label>
+                    <input type="text" class="form-control" id="number_late_payments"  name="number_late_payments" placeholder="Number of Late Payments">
+                </div>
+                <div class="mb-3">
+                    <label for="average_number_days_late" class="form-label">Average Number of Days Late</label>
+                    <input type="text" class="form-control" id="average_number_days_late"  name="average_number_days_late" placeholder="Average Number of Days Late">
+                </div>
+                <div class="mb-3">
+                    <label for="bank" class="form-label">Bank Account</label>
+                    <input type="text" class="form-control" id="bank"  name="bank" placeholder="Bank Account">
+                </div>
+
+                <input type="submit" class="btn btn-primary"> &nbsp;&nbsp;&nbsp;&nbsp;<input type="reset" class="btn btn-danger">
+           </form>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

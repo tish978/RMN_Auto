@@ -4,9 +4,9 @@ from datetime import date
 
 class Bank(SQLModel, table=True):
     bankAcct: Optional[int] = Field(primary_key=True)
-    #pmt_date: date
+    pmt_date: str
     due: float
-    #paid_date: date
+    paid_date: str
     amount: float
 
 
@@ -20,7 +20,7 @@ class Customer(SQLModel, table=True):
     state: str
     zip: int
     gender: str
-    #DOB: date
+    DOB: str
     creditScore: int
     taxpayerID: int
 
@@ -32,7 +32,7 @@ class employmentInfo(SQLModel, table=True):
     supervisorName: str
     supervisorPhone: str
     employmentAddress: str
-    #employmentStartDate: date
+    employmentStartDate: str
     customerID: int
 
 
@@ -41,7 +41,7 @@ class Employee(SQLModel, table=True):
     empID: Optional[int] = Field(primary_key=True)
     first_name: str
     last_name: str
-    #commission: double
+    commission: int
     customer_ID: int
 
 
@@ -67,8 +67,8 @@ class PurchasedCar(SQLModel, table=True):
     year: str
     color: str
     miles: int
-    #book_price: double
-    #price_paid: double
+    book_price: int
+    price_paid: int
 
 
 
@@ -76,7 +76,7 @@ class carProblems(SQLModel, table=True):
     problemID: Optional[int] = Field(primary_key=True)
     problem_description: str
     est_repair_cost: int
-    # actual_cost: double
+    actual_cost: int
     VIN: int
     car_problem_number: int
 
@@ -84,7 +84,7 @@ class carProblems(SQLModel, table=True):
 
 class Purchaser(SQLModel, table=True):
     taxID: Optional[int] = Field(primary_key=True)
-    #date: date
+    date: str
     location: str
     auction: str
     seller_dealer: str
@@ -93,9 +93,9 @@ class Purchaser(SQLModel, table=True):
 
 class Sale(SQLModel, table=True):
     sale_ID: Optional[int] = Field(primary_key=True)
-    #total_price: double
-    #down_payment: double
-    #financed_amount: double
+    total_price: int
+    down_payment: int
+    financed_amount: int
     date: str
     employee_ID: int
 
@@ -113,8 +113,8 @@ class SoldCar(SQLModel, table=True):
     VIN: Optional[int] = Field(primary_key=True)
     miles: int
     condition: str
-    #list_price: double
-    #sale_price: double
+    list_price: int
+    sale_price: int
     style: str
     interior_color: str
     warranty_ID: int

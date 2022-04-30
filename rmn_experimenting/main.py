@@ -260,8 +260,20 @@ def create_bank(request: Request, bankAcct: int = Form(...), due: float = Form(.
     return templates.TemplateResponse("bankFormOutput.html", {"request": request, "results": results})
 
 
+@app.post("/createPaymentHistory", response_class=HTMLResponse)
+def create_bank(request: Request, taxpayerID: int = Form(...), number_late_payments: int = Form(...), average_number_days_late: int = Form(...), bank: int = Form(...)):
+    print("taxpayerID :" + str(taxpayerID) + ", number_late_payments:" + str(number_late_payments) + ", average_number_days_late:" + str(average_number_days_late), "bank: " + str(bank))
+    new_paymentHistory = PaymentHistory(taxpayerID=taxpayerID, number_late_payments=number_late_payments, average_number_days_late=average_number_days_late, bank=bank)
+    session.add(new_paymentHistory)
+    session.commit()
+    print("Successfully made a new Payment History record!")
+    statement = select(PaymentHistory).where(PaymentHistory.taxpayerID == taxpayerID)
+    results=session.exec(statement).all()
+    return templates.TemplateResponse("allPaymentHistoriesOutput.html", {"request": request, "results": results})
+
+
 @app.post("/createCarSale", response_class=HTMLResponse)
-def create_carSale(request: Request, date: str = Form(...), empID: int = Form(...), e_first_name: str = Form(...), e_last_name: str = Form(...), e_phone: str = Form(...), customer_ID: int = Form(...), c_phone: str = Form(...), c_last_name: str = Form(...), c_first_name: str = Form(...), city: str = Form(...), state: str = Form(...), zip: int = Form(...), gender: str = Form(...), creditScore: int = Form(...), VIN: int = Form(...), miles: int = Form(...), condition: str = Form(...), style: str = Form(...), interior_color: str = Form(...), employerName: str = Form(...), jobTitle: str = Form(...), supervisorName: str = Form(...), supervisorPhone: str = Form(...), employmentAddress: str = Form(...)):
+def create_carSale(request: Request, date: str = Form(...), empID: int = Form(...), e_first_name: str = Form(...), e_last_name: str = Form(...), e_phone: str = Form(...), customer_ID: int = Form(...), c_phone: str = Form(...), c_last_name: str = Form(...), c_first_name: str = Form(...), city: str = Form(...), state: str = Form(...), zip: int = Form(...), gender: str = Form(...), creditScore: int = Form(...), DOB: str = Form(...), VIN: int = Form(...), miles: int = Form(...), condition: str = Form(...), style: str = Form(...), interior_color: str = Form(...), employerName: str = Form(...), jobTitle: str = Form(...), supervisorName: str = Form(...), supervisorPhone: str = Form(...), employmentAddress: str = Form(...), employmentStartDate: str = Form(...), total_price: int = Form(...), down_payment: int = Form(...), financed_amount: int = Form(...), list_price: int = Form(...), sale_price: int = Form(...)):
     print("date: " + str(date) + "empID :" + str(empID) + ", e_first_name:" + str(e_first_name) + ", e_last_name:" + str(e_last_name) + "e_phone:" + str(e_phone) + ", customer_ID:" + str(customer_ID) + ", c_phone:" + str(c_phone) + "c_last_name :" + str(c_last_name) + ", c_first_name:" + str(c_first_name) + ", city:" + str(city) + ", state:" + str(state) + ", ZIP :" + str(zip) + ", gender:" + str(gender) + "creditScore :" + str(creditScore) + ", VIN :" + str(VIN) + ", miles:" + str(miles) + "condition :" + str(condition) + ", style :" + str(style) + ", interior_color:" + str(interior_color))
     saleIDQuery = session.query(func.max(Sale.sale_ID)).first()
     new_saleID: int = 0
@@ -269,7 +281,7 @@ def create_carSale(request: Request, date: str = Form(...), empID: int = Form(..
         new_saleID = saleID + 1
         print(new_saleID)
     print(new_saleID)
-    new_sale = Sale(date=date, sale_ID=new_saleID, employee_ID=empID)
+    new_sale = Sale(date=date, sale_ID=new_saleID, employee_ID=empID, total_price=total_price, down_payment=down_payment, financed_amount=financed_amount)
 
     empIDQuery = session.query(func.max(employmentInfo.employmentID)).first()
     new_empID: int = 0
@@ -277,7 +289,7 @@ def create_carSale(request: Request, date: str = Form(...), empID: int = Form(..
         new_empID = employeeID + 1
         print(new_empID)
     print("new_empID is: " + str(new_empID))
-    new_employmentInfo = employmentInfo(employmentID=new_empID, employerName=employerName, jobTitle=jobTitle, supervisorName=supervisorName, supervisorPhone=supervisorPhone, employmentAddress=employmentAddress, customerID=customer_ID)
+    new_employmentInfo = employmentInfo(employmentID=new_empID, employerName=employerName, jobTitle=jobTitle, supervisorName=supervisorName, supervisorPhone=supervisorPhone, employmentAddress=employmentAddress, employmentStartDate=employmentStartDate, customerID=customer_ID)
 
     purchasedCar = select(PurchasedCar).where(PurchasedCar.VIN == VIN)
     pCarResult: PurchasedCar = session.exec(purchasedCar).first()
@@ -297,9 +309,9 @@ def create_carSale(request: Request, date: str = Form(...), empID: int = Form(..
     else:
         print("No previous customerID")
     print("Updated employee is: + " + str(result))
-    new_customer = Customer(customer_ID=customer_ID, phone=c_phone, last_name=c_last_name, first_name=c_first_name, city=city, state=state, zip=zip, gender=gender, creditScore=creditScore)
+    new_customer = Customer(customer_ID=customer_ID, phone=c_phone, last_name=c_last_name, first_name=c_first_name, city=city, state=state, zip=zip, gender=gender, creditScore=creditScore, DOB=DOB)
     print("New customer is: " + str(new_customer))
-    new_soldcar = SoldCar(customer_ID=customer_ID, VIN=pCarVIN, miles=miles, condition=condition, style=style, interior_color=interior_color)
+    new_soldcar = SoldCar(customer_ID=customer_ID, VIN=pCarVIN, miles=miles, condition=condition, list_price=list_price, sale_price=sale_price, style=style, interior_color=interior_color)
     #new_soldcar.VIN = pCarResult.VIN
     print("New sold car is: " + str(new_soldcar))
     session.add(new_sale)
@@ -384,10 +396,10 @@ def get_bank(request: Request, bankAcct: int):
 
 
 @app.post("/createCarPurchase", response_class=HTMLResponse)
-def create_bank(request: Request, taxID: int = Form(...), location: str = Form(...), auction: str = Form(...), seller_dealer: str = Form(...), VIN: int = Form(...), make: str = Form(...), model: str = Form(...), year: str = Form(...), color: str = Form(...), miles: str = Form(...), car_problem_number: int = Form(...), problem_description: str = Form(...), est_repair_cost: int = Form(...)):
+def create_bank(request: Request, taxID: int = Form(...), date: str = Form(...),location: str = Form(...), auction: str = Form(...), seller_dealer: str = Form(...), VIN: int = Form(...), make: str = Form(...), model: str = Form(...), year: str = Form(...), color: str = Form(...), miles: str = Form(...), book_price: int = Form(...), price_paid: int = Form(...),car_problem_number: int = Form(...), problem_description: str = Form(...), est_repair_cost: int = Form(...)):
     print("taxID :" + str(taxID) + ", location:" + str(location) + ", auction:" + str(auction) + "seller_dealer :" + str(seller_dealer) + ", VIN:" + str(VIN) + ", make:" + str(make) + "model :" + str(model) + ", year:" + str(year) + ", color:" + str(color) + "miles :" + str(miles))
-    new_purchaser = Purchaser(taxID=taxID, location=location, auction=auction, seller_dealer=seller_dealer, VIN=VIN)
-    new_purchasedCar = PurchasedCar(VIN=VIN, make=make, model=model, year=year, color=color, miles=miles)
+    new_purchaser = Purchaser(taxID=taxID, date=date, location=location, auction=auction, seller_dealer=seller_dealer, VIN=VIN)
+    new_purchasedCar = PurchasedCar(VIN=VIN, make=make, model=model, year=year, color=color, miles=miles, book_price=book_price, price_paid=price_paid)
 
     problemIDQuery = session.query(func.max(carProblems.problemID)).first()
     new_problemID: int = 0
@@ -430,6 +442,10 @@ def formTwo_page(request: Request):
     return templates.TemplateResponse("warrantyForm.html", {"request": request})
 
 
+@app.get("/createForm4", response_class=HTMLResponse)
+def formTwo_page(request: Request):
+    return templates.TemplateResponse("paymentHistoryForm.html", {"request": request})
+
 
 @app.get("/createReport1", response_class=HTMLResponse)
 def formTwo_page(request: Request):
@@ -448,7 +464,7 @@ def formTwo_page(request: Request):
 
 @app.get("/createReport4", response_class=HTMLResponse)
 def formTwo_page(request: Request):
-    return templates.TemplateResponse("all-payment-histories-report.html", {"request": request})
+    return templates.TemplateResponse("all-sold-warranties-output.html", {"request": request})
 
 
 

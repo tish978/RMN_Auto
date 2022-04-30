@@ -7,8 +7,12 @@
     <h1> Form 1 Draft </h1>
         <form action="http://127.0.0.1:8000/createCarPurchase" method="post">
                 <div class="mb-3">
-                      <label for="taxID" class="form-label">TaxID</label>
-                      <input type="text" class="form-control"   id="taxID" name="taxID">
+                      <label for="taxID" class="form-label">Tax ID</label>
+                      <input type="text" class="form-control"   id="taxID" name="taxID" placeholder="Tax ID">
+                </div>
+                <div class="mb-3">
+                      <label for="date" class="form-label">Date</label>
+                      <input type="text" class="form-control"   id="date" name="date" placeholder="Date">
                 </div>
                  <div class="mb-3">
                       <label for="location" class="form-label">Location</label>
@@ -45,6 +49,14 @@
                 <div class="mb-3">
                     <label for="miles" class="form-label">Miles</label>
                     <input type="text" class="form-control" id="miles"  name="miles" placeholder="miles">
+                </div>
+                <div class="mb-3">
+                    <label for="book_price" class="form-label">Book Price</label>
+                    <input type="text" class="form-control" id="book_price"  name="book_price" placeholder="Book Price">
+                </div>
+                <div class="mb-3">
+                    <label for="price_paid" class="form-label">Price Paid</label>
+                    <input type="text" class="form-control" id="price_paid"  name="price_paid" placeholder="Price Paid">
                 </div>
 
 
