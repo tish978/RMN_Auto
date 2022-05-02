@@ -3,8 +3,37 @@
     <title>Bank Details</title>
 
 </head>
+<style>
+
+body {
+    height: 1500px;
+  background: linear-gradient(blue, navajowhite, yellow);
+}
+
+.mb-3 {
+    padding: 5px;
+    color: yellow;
+    text-align: center;
+}
+
+.bigTitle{
+    padding: 5px;
+    color: yellow;
+    text-align: center;
+}
+
+
+.button {
+    padding: 5px;
+    text-align: center;
+}
+
+</style>
 <body>
-    <h1> Form 1 Draft </h1>
+    <div class="bigTitle">
+        <h1> Purchase Car </h1>
+        <p>Please fill out the fields below for the car you wish to purchase.</p>
+    </div>
         <form action="http://127.0.0.1:8000/createCarPurchase" method="post">
                 <div class="mb-3">
                       <label for="taxID" class="form-label">Tax ID</label>
@@ -52,31 +81,32 @@
                 </div>
                 <div class="mb-3">
                     <label for="book_price" class="form-label">Book Price</label>
-                    <input type="text" class="form-control" id="book_price"  name="book_price" placeholder="Book Price">
+                    <input type="text" class="form-control" id="book_price"  name="book_price" placeholder="Book Price in USD">
                 </div>
                 <div class="mb-3">
                     <label for="price_paid" class="form-label">Price Paid</label>
-                    <input type="text" class="form-control" id="price_paid"  name="price_paid" placeholder="Price Paid">
+                    <input type="text" class="form-control" id="price_paid"  name="price_paid" placeholder="Price Paid in USD">
                 </div>
 
 
 
                 <div class="mb-3">
                     <label for="car_problem_number" class="form-label">Car Problem #</label>
-                    <input type="text" class="form-control" id="car_problem_number"  name="car_problem_number" placeholder="car_problem_number">
+                    <input type="text" class="form-control" id="car_problem_number"  name="car_problem_number" placeholder="Car Problem Number">
                 </div>
                 <div class="mb-3">
                     <label for="problem_description" class="form-label">Problem Description</label>
-                    <input type="text" class="form-control" id="problem_description"  name="problem_description" placeholder="problem_description">
+                    <input type="text" class="form-control" id="problem_description"  name="problem_description" placeholder="Description of Problem">
                 </div>
                 <div class="mb-3">
                     <label for="est_repair_cost" class="form-label">Est. Repair Cost</label>
-                    <input type="text" class="form-control" id="est_repair_cost"  name="est_repair_cost" placeholder="est_repair_cost">
+                    <input type="text" class="form-control" id="est_repair_cost"  name="est_repair_cost" placeholder="Cost Estimation in USD">
                 </div>
 
-
-                <input type="submit" class="btn btn-primary"> &nbsp;&nbsp;&nbsp;&nbsp;<input type="reset" class="btn btn-danger">
-           </form>
+                <div class="button">
+                    <input type="submit" class="btn btn-primary"> &nbsp;&nbsp;&nbsp;&nbsp;<input type="reset" class="btn btn-danger">
+                </div>
+        </form>
         </div>
     </div>
 </div>

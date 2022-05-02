@@ -41,6 +41,8 @@ class Employee(SQLModel, table=True):
     empID: Optional[int] = Field(primary_key=True)
     first_name: str
     last_name: str
+    username: str
+    password: str
     commission: int
     customer_ID: int
 

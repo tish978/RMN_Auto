@@ -3,8 +3,36 @@
     <title>Sold Cars Details</title>
 
 </head>
+<style>
+
+body {
+    height: 1500px;
+  background: linear-gradient(blue, navajowhite, yellow);
+}
+
+.mb-3 {
+    padding: 5px;
+    color: yellow;
+    text-align: center;
+}
+
+.bigTitle{
+    padding: 5px;
+    color: yellow;
+    text-align: center;
+}
+
+
+.button {
+    padding: 5px;
+    text-align: center;
+}
+
+</style>
 <body>
-    <h1> Sold Cars Report </h1>
+    <div class="bigTitle">
+        <h1> Sold Cars Report </h1>
+    </div>
         <form action="http://127.0.0.1:8000/getAllSoldCars" method="post">
             <div class="mb-3">
                     <label for="customer_ID" class="form-label">Customer ID: </label>

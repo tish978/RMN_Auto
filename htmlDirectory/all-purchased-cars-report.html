@@ -3,14 +3,45 @@
     <title>Purchased Cars Details</title>
 
 </head>
+<style>
+
+body {
+    height: 1500px;
+  background: linear-gradient(blue, navajowhite, yellow);
+}
+
+.mb-3 {
+    padding: 5px;
+    color: yellow;
+    text-align: center;
+}
+
+.bigTitle{
+    padding: 5px;
+    color: yellow;
+    text-align: center;
+}
+
+
+.button {
+    padding: 5px;
+    text-align: center;
+}
+
+</style>
 <body>
-    <h1> All Purchased Cars Report </h1>
+    <div class="bigTitle">
+        <h1> All Purchased Cars Report </h1>
+        <p>Optionally enter field below to view information on Purchased Cars</p>
+    </div>
         <form action="http://127.0.0.1:8000/purchasedCarsRequest" method="post">
             <div class="mb-3">
                     <label for="make" class="form-label">Make: </label>
                     <input type="text" class="form-control" id="make"  name="make" placeholder="Make">
             </div>
-            <input type="submit" class="btn btn-primary"> &nbsp;&nbsp;&nbsp;&nbsp;<input type="reset" class="btn btn-danger">
+            <div class="button">
+                <input type="submit" class="btn btn-primary"> &nbsp;&nbsp;&nbsp;&nbsp;<input type="reset" class="btn btn-danger">
+            </div>
         </form>
 </body>
 </html>

@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="ProjectResources">
+    <resource url="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&amp;display=swap" location="$PROJECT_DIR$/htmlDirectory/style.css" />
+  </component>
   <component name="ProjectRootManager" version="2" project-jdk-name="Poetry (RMN_experimenting)" project-jdk-type="Python SDK" />
 </project>

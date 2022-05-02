@@ -4,22 +4,70 @@
     <meta charset="UTF-8">
     <title>TEST</title>
 </head>
+<style>
+
+body {
+    height: 1500px;
+  background: linear-gradient(blue, navajowhite, yellow);
+}
+
+.mb-3 {
+    padding: 5px;
+    color: yellow;
+    text-align: center;
+}
+
+.bigTitle{
+    padding: 5px;
+    color: yellow;
+    text-align: center;
+}
+
+
+.tableContents {
+    padding: 5px;
+    text-align: center;
+    color: white;
+}
+
+.tableHeader {
+    padding: 5px;
+    text-align: center;
+    color: aqua;
+}
+
+</style>
 <body>
-<h1> All Purchased Cars Report </h1>
-
-    <table cellspacing="3" border="1" style="width:100%">
-        <tr>
-            <th>Purchase Results</th>
-
+<div class="bigTitle">
+    <h1> All Purchased Cars Report </h1>
+    <p>Purchased Car Results:</p>
+</div>
+    <div class="tableHeader">
+        <table cellspacing="3" border="1" style="width:100%">
             <tr>
-                <td>{{results}}</td>
-            </tr>
+                <th>Year</th>
+                <th>VIN</th>
+                <th>Miles</th>
+                <th>Price Paid</th>
+                <th>Make</th>
+                <th>Model</th>
+                <th>Color</th>
+                <th>Book Price</th>
 
-        </tr>
-    </table>
-
-
-
-
+                {% for result in results %}
+                    <tr>
+                        <td>{{result.year}}</td>
+                        <td>{{result.VIN}}</td>
+                        <td>{{result.miles}}</td>
+                        <td>{{result.price_paid}}</td>
+                        <td>{{result.make}}</td>
+                        <td>{{result.model}}</td>
+                        <td>{{result.color}}</td>
+                        <td>{{result.book_price}}</td>
+                    </tr>
+                    {% endfor %}
+                    </tr>
+            </table>
+    </div>
 </body>
 </html>

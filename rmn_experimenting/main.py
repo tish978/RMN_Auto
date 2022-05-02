@@ -1,4 +1,4 @@
-from fastapi import FastAPI, Body, Form, Request, File, UploadFile
+from fastapi import FastAPI, Header, Depends, Body, Form, Request, File, UploadFile
 from fastapi import status
 from fastapi.exceptions import HTTPException
 from fastapi.responses import HTMLResponse
@@ -8,13 +8,42 @@ from database import engine
 from sqlmodel import Session, select
 from typing import Optional, List
 from sqlalchemy import func
+from auth import AuthHandler
+from schemas import AuthDetails
 import datetime
 import database
 
 app = FastAPI()
 
+auth_handler = AuthHandler()
+tokens = []
+
+
 session=Session(bind=engine)
 templates = Jinja2Templates(directory="htmlDirectory")
+
+
+@app.on_event("startup")
+def init_data():
+    print("Application started!")
+    header: str = None
+    print("Current value of header is: " + str(header))
+    return
+
+@app.get("/loginPage", response_class=HTMLResponse)
+def loginPage(request: Request):
+    templates.TemplateResponse("login-page.html", {"request": request})
+
+
+@app.get("/setHeader")
+def set_header(header2: str = Header(...)):
+    header = header2
+    print("Current value of header is: " + str(header))
+    return header
+
+@app.get("/getHeader")
+def get_header():
+    return {"tokens": tokens}
 
 @app.get("/tables")
 async def get_all_tables():
@@ -22,6 +51,11 @@ async def get_all_tables():
 
 #                           get functions                       #
 ####################################################################################
+@app.get("/test", tags=["test"])
+def greet():
+    return {"Hello World!"}
+
+
 @app.get("/banks", response_model=List[Bank])
 async def get_all_banks():
     statement=select(Bank)
@@ -77,25 +111,78 @@ async def get_all_purchasedCars():
     return results
 
 
+
+@app.post('/register', response_class=HTMLResponse)
+def register(request: Request, username: str = Form(...), password: str = Form(...), empID: int = Form(...)):
+    #if any(x['username'] == auth_details.username for x in users):
+        #raise HTTPException(status_code=400, detail='Username is taken')
+    statement = select(Employee).where(Employee.username == username)
+    result = session.exec(statement).first()
+    print("Result value: " + str(result))
+    if result is not None:
+        raise HTTPException(status_code=400, detail='Username is taken')
+    statement2 = select(Employee).where(Employee.empID == empID)
+    result2 = session.exec(statement2).first()
+    #hashed_password = auth_handler.get_password_hash(password2)
+    result2.username = username
+    result2.password = password
+    session.commit()
+
+    return templates.TemplateResponse("login-page.html", {"request": request})
+
+
+@app.post('/login', response_class=HTMLResponse)
+def login(request: Request, username: Optional[str] = None):
+    user = None
+    #statement = select(Employee).where(Employee.username == auth_details.username)
+    statement = select(Employee).where(Employee.username == username)
+    result = session.exec(statement).first()
+    if result.username is not None:
+        user = result
+    #token = auth_handler.encode_token(result.username)
+    token = auth_handler.encode_token(result.username)
+    tokens.append(token)
+    #return header
+    print("Value of Tokens[0]: " + str(tokens[0]))
+    return templates.TemplateResponse("Car-Purchase-Form.html", {"request": request})
+
+@app.get('/unprotected')
+def unprotected(header: str = Header(...)):
+    if (header == header):
+        return {'hello': 'world'}
+    else:
+        return
+
+
+@app.get('/protected')
+def protected(username=Depends(auth_handler.auth_wrapper)):
+    return { 'name': username }
+
+
+
 @app.post("/purchasedCarsRequest", response_class=HTMLResponse)
 async def get_all_purchasedCarsRequest(request: Request, make: Optional[str] = None):
     #statement=select(PurchasedCar).where(PurchasedCar.make == make)
 
-    if make:
-        print(make)
-        statement = select(PurchasedCar).where(PurchasedCar.make == make)
-        print(statement)
-        results=session.exec(statement).all()
-        print(results)
+    #if len(tokens) > 0:
+        if make:
+            print(make)
+            statement = select(PurchasedCar).where(PurchasedCar.make == make)
+            print(statement)
+            results=session.exec(statement).all()
+            print(results)
 
-        return templates.TemplateResponse("allPurchasedCarsOutput.html", {"request": request, "results": results})
-    else:
-        statement = select(PurchasedCar)
-        print(statement)
-        results = session.exec(statement).all()
-        print(results)
+            return templates.TemplateResponse("allPurchasedCarsOutput.html", {"request": request, "results": results})
+        else:
+            statement = select(PurchasedCar)
+            print(statement)
+            results = session.exec(statement).all()
+            print(results)
 
-        return templates.TemplateResponse("allPurchasedCarsOutput.html", {"request": request, "results": results})
+            return templates.TemplateResponse("allPurchasedCarsOutput.html", {"request": request, "results": results})
+
+    #else:
+       # print("No header!!!!!!!!!")
 
 @app.post("/getAllPaymentHistories", response_class=HTMLResponse)
 async def get_all_paymentHistories(request: Request, customer_ID: Optional[int] = None):
@@ -418,6 +505,30 @@ def create_bank(request: Request, taxID: int = Form(...), date: str = Form(...),
                                       {"request": request, "results1": new_purchaser, "results2": new_purchasedCar,
                                        "results3": new_carProblems})
 
+
+@app.get("/testCSS", response_class=HTMLResponse)
+def loginForm_page(request: Request):
+    return templates.TemplateResponse("test-CSS.html", {"request": request})
+
+@app.get("/home", response_class=HTMLResponse)
+def loginForm_page(request: Request):
+    return templates.TemplateResponse("test-CSS-2.html", {"request": request})
+
+@app.get("/home2", response_class=HTMLResponse)
+def loginForm_page(request: Request):
+    return templates.TemplateResponse("test-CSS-3.html", {"request": request})
+
+@app.get("/test-CSS-3.html", response_class=HTMLResponse)
+def loginForm_page(request: Request):
+    return templates.TemplateResponse("test-CSS-3.html", {"request": request})
+
+@app.get("/createLoginForm", response_class=HTMLResponse)
+def loginForm_page(request: Request):
+    return templates.TemplateResponse("login-page.html", {"request": request})
+
+@app.get("/createRegisterForm", response_class=HTMLResponse)
+def loginForm_page(request: Request):
+    return templates.TemplateResponse("register-page.html", {"request": request})
 
 @app.get("/createBankForm", response_class=HTMLResponse)
 def bankForm_page(request: Request):

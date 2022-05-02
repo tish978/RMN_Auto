@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Test CSS Dashboard</title>
+    <style>
+        h1 {
+            color: red;
+        }
+        .items {
+            color: aqua;
+            margin-top: 40px;
+        }
+        .item li {
+            list-style: none;
+            padding: 15px 0;
+            transition: 0.3s ease;
+        }
+        .items li a {
+            text-decoration: none;
+            color: rgb(134, 141, 151);
+            font-weight: 300;
+            transition: 0.3s ease;
+        }
+        .items li:nth-child(1){
+            border-left: 4px solid #ffff;
+        }
+        .items li:hover{
+            background: purple;
+            cursor: pointer;
+        }
+        #menu {
+             background: mediumpurple;
+             width: 300px;
+             height: 100%;
+        }
+    </style>
+
+    <!--<link rel="stylesheet" href="../css/style.css"> -->
+</head>
+<body>
+
+    <div class="wrapper">
+        <h1>FRONT PAGE</h1>
+    </div>
+
+    <section id="menu">
+        <div>
+            <h2>Dashboard</h2>
+        </div>
+
+        <div class="items">
+            <li><a href="#">Car Purchasing</a></li>
+            <li><a href="#">Car Selling</a></li>
+            <li><a href="#">Warranties</a></li>
+            <li><a href="#">Customer Information</a></li>
+            <li><a href="#">Test5</a></li>
+        </div>
+    </section>
+
+</body>
+</html>
