@@ -74,68 +74,99 @@ body {
 <body>
 <div class="bigTitle">
         <h1> Created Car Sale </h1>
-        <p>Optionally enter field below to view information on Employee(s)</p>
+        <p>Successful Car Sale Results:</p>
     </div>
-<h1> Created Car Sale Info: </h1>
 
+
+<div class="tableHeader">
+    <h3>Sale Details</h3>
     <table cellspacing="3" border="1" style="width:100%">
         <tr>
-            <th>Sale Results</th>
+            <th class="saleID">Sale ID</th>
+            <th class="sale_date">Sale Date</th>
 
             <tr>
-                <td> SaleID: {{results1.sale_ID}}</td>
-                <td> Date: {{results1.date}}</td>
-                <td> EmployeeID: {{results1.employee_ID}}</td>
+                <td> {{results1.sale_ID}}</td>
+                <td> {{results1.date}}</td>
             </tr>
 
         </tr>
     </table>
+</div>
 
 
 
+<div class="tableHeader">
+    <h3>Employee Results</h3>
     <table cellspacing="3" border="1" style="width:100%">
         <tr>
-            <th>Employee Results</th>
+            <th class="empID">Employee ID</th>
+            <th class="first_name">First Name</th>
+            <th class="last_name">Last Name</th>
+
             <tr>
-                <td> EmployeeID: {{results2.empID}}</td>
-                <td> First Name: {{results2.first_name}}</td>
-                <td> Last Name: {{results2.last_name}}</td>
+                <td> {{results2.empID}}</td>
+                <td> {{results2.first_name}}</td>
+                <td> {{results2.last_name}}</td>
             </tr>
+
         </tr>
     </table>
+</div>
 
-
+<div class="tableHeader">
+    <h3>Customer Results</h3>
     <table cellspacing="3" border="1" style="width:100%">
         <tr>
-            <th>Customer Results</th>
+            <th class="customer_ID">Customer ID</th>
+            <th class="phone">Phone</th>
+            <th class="first_name">First Name</th>
+            <th class="last_name">Last Name</th>
+            <th class="city">City</th>
+            <th class="state">State</th>
+            <th class="ZIP">ZIP</th>
+            <th class="gender">Gender</th>
+            <th class="creditScore">Credit Score</th>
+
             <tr>
-                <td> CustomerID: {{results3.customer_ID}}</td>
-                <td> Phone: {{results3.phone}}</td>
-                <td> First Name: {{results3.first_name}}</td>
-                <td> Last Name: {{results3.last_name}}</td>
-                <td> City: {{results3.city}}</td>
-                <td> State: {{results3.state}}</td>
-                <td> Zip: {{results3.zip}}</td>
-                <td> Gender: {{results3.gender}}</td>
-                <td> Credit Score: {{results3.creditScore}}</td>
+                <td> {{results3.customer_ID}}</td>
+                <td> {{results3.phone}}</td>
+                <td> {{results3.first_name}}</td>
+                <td> {{results3.last_name}}</td>
+                <td> {{results3.city}}</td>
+                <td> {{results3.state}}</td>
+                <td> {{results3.zip}}</td>
+                <td> {{results3.gender}}</td>
+                <td> {{results3.creditScore}}</td>
             </tr>
+
         </tr>
     </table>
+</div>
 
 
+<div class="tableHeader">
+    <h3>Sold Car Details</h3>
     <table cellspacing="3" border="1" style="width:100%">
         <tr>
-            <th>Sold Car Results</th>
+            <th class="VIN">VIN</th>
+            <th class="miles">Miles</th>
+            <th class="condition">Condition</th>
+            <th class="style">Style</th>
+            <th class="interior_color">Interior Color</th>
+
             <tr>
-                <td> CustomerID: {{results4.customer_ID}}</td>
-                <td> VIN: {{results4.VIN}}</td>
-                <td> Miles: {{results4.miles}}</td>
-                <td> Condition: {{results4.condition}}</td>
-                <td> Style: {{results4.style}}</td>
-                <td> Interior Color: {{results4.interior_color}}</td>
+                <td> {{results4.VIN}}</td>
+                <td> {{results4.miles}}</td>
+                <td> {{results4.condition}}</td>
+                <td> {{results4.style}}</td>
+                <td> {{results4.interior_color}}</td>
             </tr>
+
         </tr>
     </table>
+</div>
+
 
 </body>
 </html>

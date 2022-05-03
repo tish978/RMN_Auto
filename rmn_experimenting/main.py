@@ -143,7 +143,7 @@ def login(request: Request, username: Optional[str] = None):
     tokens.append(token)
     #return header
     print("Value of Tokens[0]: " + str(tokens[0]))
-    return templates.TemplateResponse("Car-Purchase-Form.html", {"request": request})
+    return templates.TemplateResponse("test-CSS-2.html", {"request": request})
 
 @app.get('/unprotected')
 def unprotected(header: str = Header(...)):

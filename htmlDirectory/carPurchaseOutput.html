@@ -4,49 +4,248 @@
     <meta charset="UTF-8">
     <title>TEST</title>
 </head>
+<style>
+
+body {
+    height: 1500px;
+  background: linear-gradient(blue, navajowhite, yellow);
+}
+
+.mb-3 {
+    padding: 5px;
+    color: yellow;
+    text-align: center;
+}
+
+.bigTitle{
+    padding: 5px;
+    color: yellow;
+    text-align: center;
+}
+
+
+.tableContents {
+    padding: 5px;
+    text-align: center;
+    color: white;
+}
+
+.tableHeader {
+    padding: 5px;
+    text-align: center;
+    color: yellow;
+}
+
+.year {
+    padding: 5px;
+    text-align: center;
+    color: black;
+    background-color: yellow;
+    font-weight: bold;
+}
+
+.VIN {
+    padding: 5px;
+    text-align: center;
+    color: black;
+    background-color: yellow;
+    font-weight: bold;
+}
+
+.taxID {
+    padding: 5px;
+    text-align: center;
+    color: black;
+    background-color: yellow;
+    font-weight: bold;
+}
+
+
+.location {
+    padding: 5px;
+    text-align: center;
+    color: black;
+    background-color: yellow;
+    font-weight: bold;
+}
+
+.auction {
+    padding: 5px;
+    text-align: center;
+    color: black;
+    background-color: yellow;
+    font-weight: bold;
+}
+
+.seller_dealer {
+    padding: 5px;
+    text-align: center;
+    color: black;
+    background-color: yellow;
+    font-weight: bold;
+}
+
+.make {
+    padding: 5px;
+    text-align: center;
+    color: black;
+    background-color: yellow;
+    font-weight: bold;
+}
+
+.model {
+    padding: 5px;
+    text-align: center;
+    color: black;
+    background-color: yellow;
+    font-weight: bold;
+}
+
+.year {
+    padding: 5px;
+    text-align: center;
+    color: black;
+    background-color: yellow;
+    font-weight: bold;
+}
+
+
+.color {
+    padding: 5px;
+    text-align: center;
+    color: black;
+    background-color: yellow;
+    font-weight: bold;
+}
+
+
+.miles {
+    padding: 5px;
+    text-align: center;
+    color: black;
+    background-color: yellow;
+    font-weight: bold;
+}
+
+
+
+.book_price {
+    padding: 5px;
+    text-align: center;
+    color: black;
+    background-color: yellow;
+    font-weight: bold;
+}
+
+
+
+.price_paid {
+    padding: 5px;
+    text-align: center;
+    color: black;
+    background-color: yellow;
+    font-weight: bold;
+}
+
+.problemID {
+    padding: 5px;
+    text-align: center;
+    color: black;
+    background-color: yellow;
+    font-weight: bold;
+}
+
+
+.problem_description {
+    padding: 5px;
+    text-align: center;
+    color: black;
+    background-color: yellow;
+    font-weight: bold;
+}
+
+
+.est_repair_cost {
+    padding: 5px;
+    text-align: center;
+    color: black;
+    background-color: yellow;
+    font-weight: bold;
+}
+
+</style>
 <body>
-<h1> Created Car Purchase Info: </h1>
+<div class="bigTitle">
+    <h1> Car Purchase Info </h1>
+    <p>Successful Car Purchase Results:</p>
+</div>
 
+<div class="tableHeader">
+    <h3>Purchaser Details</h3>
     <table cellspacing="3" border="1" style="width:100%">
         <tr>
-            <th>Purchase Results</th>
+            <th class="taxID">Tax ID</th>
+            <th class="location">Location</th>
+            <th class="auction">Auction</th>
+            <th class="seller_dealer">Seller/Dealer</th>
 
             <tr>
-                <td> TaxID: {{results1.taxID}}</td>
-                <td> Location: {{results1.location}}</td>
-                <td> Auction: {{results1.auction}}</td>
-                <td> Seller/Dealer: {{results1.seller_dealer}}</td>
+                <td> {{results1.taxID}}</td>
+                <td> {{results1.location}}</td>
+                <td> {{results1.auction}}</td>
+                <td> {{results1.seller_dealer}}</td>
             </tr>
 
         </tr>
     </table>
+</div>
 
 
+<div class="tableHeader">
+    <h3>Purchased Car Details</h3>
     <table cellspacing="3" border="1" style="width:100%">
         <tr>
-            <th>Purchased Car Results</th>
+            <th class="VIN">VIN</th>
+            <th class="make">Make</th>
+            <th class="model">Model</th>
+            <th class="year">Year</th>
+            <th class="color">Color</th>
+            <th class="miles">Miles</th>
+            <th class="book_price">Color</th>
+            <th class="price_paid">Miles</th>
+
             <tr>
-                <td> VIN: {{results2.VIN}}</td>
-                <td> Make: {{results2.make}}</td>
-                <td> Model: {{results2.model}}</td>
-                <td> Year: {{results2.year}}</td>
-                <td> Color: {{results2.color}}</td>
-                <td> Miles: {{results2.miles}}</td>
+                <td> {{results2.VIN}}</td>
+                <td> {{results2.make}}</td>
+                <td> {{results2.model}}</td>
+                <td> {{results2.year}}</td>
+                <td> {{results2.color}}</td>
+                <td> {{results2.miles}}</td>
+                <td> {{results2.book_price}}</td>
+                <td> {{results2.price_paid}}</td>
             </tr>
+
         </tr>
     </table>
+</div>
 
-
+<div class="tableHeader">
+    <h3>Reported Car Issue Details</h3>
     <table cellspacing="3" border="1" style="width:100%">
         <tr>
-            <th>Car Problems</th>
+            <th class="problemID">Problem ID</th>
+            <th class="problem_description">Problem Description</th>
+            <th class="est_repair_cost">Estimated Repair Cost</th>
+
             <tr>
-                <td> ProblemID: {{results3.problemID}}</td>
-                <td> Problem Description: {{results3.problem_description}}</td>
-                <td> Estimated Repair Cost: {{results3.est_repair_cost}}</td>
-            </tr>
+                <td> {{results3.problemID}}</td>
+                <td> {{results3.problem_description}}</td>
+                <td> {{results3.est_repair_cost}}</td>
+             </tr>
+
         </tr>
     </table>
+</div>
 
 
 </body>
