@@ -34,7 +34,6 @@ def init_data():
 def loginPage(request: Request):
     templates.TemplateResponse("login-page.html", {"request": request})
 
-
 @app.get("/setHeader")
 def set_header(header2: str = Header(...)):
     header = header2
@@ -610,6 +609,9 @@ def formTwo_page(request: Request):
 @app.get("/createReport5", response_class=HTMLResponse)
 def formTwo_page(request: Request):
     return templates.TemplateResponse("all-payment-histories-report.html", {"request": request})
+
+
+
 
 @app.get("/creditScoreReport", response_class=HTMLResponse)
 def formTwo_page(request: Request):

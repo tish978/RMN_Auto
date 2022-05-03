@@ -28,6 +28,13 @@ body {
     text-align: center;
 }
 
+.paymentHeader{
+    padding: 5px;
+    color: indigo;
+    text-align: center;
+}
+
+
 </style>
 <body>
     <div class="bigTitle">
@@ -35,6 +42,10 @@ body {
         <p>Please fill out the fields below to update Payment History for a Customer.</p>
     </div>
         <form action="http://127.0.0.1:8000/createPaymentHistory" method="post">
+
+            <div class="paymentHeader">
+                <h3>Payment History Details</h3>
+            </div>
                 <div class="mb-3">
                     <label for="taxpayerID" class="form-label">Taxpayer ID</label>
                     <input type="text" class="form-control" id="taxpayerID"  name="taxpayerID" placeholder="Taxpayer ID">

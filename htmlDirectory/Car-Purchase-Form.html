@@ -12,7 +12,7 @@ body {
 
 .mb-3 {
     padding: 5px;
-    color: yellow;
+    color: black;
     text-align: center;
 }
 
@@ -22,6 +22,12 @@ body {
     text-align: center;
 }
 
+
+.purchaserHeader{
+    padding: 5px;
+    color: black;
+    text-align: center;
+}
 
 .button {
     padding: 5px;
@@ -35,6 +41,11 @@ body {
         <p>Please fill out the fields below for the car you wish to purchase.</p>
     </div>
         <form action="http://127.0.0.1:8000/createCarPurchase" method="post">
+
+
+            <div class="purchaserHeader">
+                <h3>Purchaser Details</h3>
+            </div>
                 <div class="mb-3">
                       <label for="taxID" class="form-label">Tax ID</label>
                       <input type="text" class="form-control"   id="taxID" name="taxID" placeholder="Tax ID">
@@ -46,7 +57,6 @@ body {
                  <div class="mb-3">
                       <label for="location" class="form-label">Location</label>
                       <input type="text" class="form-control" id="location"  name="location" placeholder="location">
-                </div>
                  <div class="mb-3">
                     <label for="auction" class="form-label">Auction</label>
                     <input type="text" class="form-control" id="auction"  name="auction" placeholder="auction">
@@ -55,6 +65,10 @@ body {
                     <label for="seller_dealer" class="form-label">Seller/Dealer</label>
                     <input type="text" class="form-control" id="seller_dealer"  name="seller_dealer" placeholder="seller_dealer">
                 </div>
+
+            <div class="purchasedCarHeader">
+                <h3>Car Details</h3>
+            </div>
                 <div class="mb-3">
                     <label for="VIN" class="form-label">VIN</label>
                     <input type="text" class="form-control" id="VIN"  name="VIN" placeholder="VIN">
@@ -89,7 +103,9 @@ body {
                 </div>
 
 
-
+            <div class="carProblems">
+                <h3>Issue(s) with Car</h3>
+            </div>
                 <div class="mb-3">
                     <label for="car_problem_number" class="form-label">Car Problem #</label>
                     <input type="text" class="form-control" id="car_problem_number"  name="car_problem_number" placeholder="Car Problem Number">
@@ -106,8 +122,9 @@ body {
                 <div class="button">
                     <input type="submit" class="btn btn-primary"> &nbsp;&nbsp;&nbsp;&nbsp;<input type="reset" class="btn btn-danger">
                 </div>
-        </form>
+
         </div>
+            </form>
     </div>
 </div>
 

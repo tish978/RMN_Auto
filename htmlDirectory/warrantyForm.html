@@ -28,13 +28,23 @@ body {
     text-align: center;
 }
 
+.warrantyHeader{
+    padding: 5px;
+    color: black;
+    text-align: center;
+}
+
 </style>
 <body>
     <div class="bigTitle">
-        <h1> Sell Warranty </h1>
+        <h1> Warranty Details </h1>
         <p>Please fill out the fields below for the Warranty you wish to Sell.</p>
     </div>
         <form action="http://127.0.0.1:8000/createWarrantySale" method="post">
+
+            <div class="warrantyHeader">
+                <h3>Sale Details</h3>
+            </div>
                 <div class="mb-3">
                     <label for="VIN" class="form-label">VIN</label>
                     <input type="text" class="form-control" id="VIN"  name="VIN" placeholder="VIN">

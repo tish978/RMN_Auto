@@ -23,6 +23,39 @@ body {
 }
 
 
+.saleHeader{
+    padding: 5px;
+    color: black;
+    text-align: center;
+}
+
+.employeeHeader{
+    padding: 5px;
+    color: black;
+    text-align: center;
+}
+
+
+.customerHeader{
+    padding: 5px;
+    color: black;
+    text-align: center;
+}
+
+.carHeader{
+    padding: 5px;
+    color: black;
+    text-align: center;
+}
+
+.employmentHeader{
+    padding: 5px;
+    color: black;
+    text-align: center;
+}
+
+
+
 .button {
     padding: 5px;
     text-align: center;
@@ -35,6 +68,10 @@ body {
     <p>Please fill out the fields below for the car you wish to sell.</p>
 </div>
         <form action="http://127.0.0.1:8000/createCarSale" method="post">
+
+            <div class="saleHeader">
+                <h3>Sale Details</h3>
+            </div>
                 <div class="mb-3">
                     <label for="date" class="form-label">Date</label>
                     <input type="text" class="form-control" id="date"  name="date" placeholder="YYYY-MM-DD">
@@ -51,6 +88,11 @@ body {
                     <label for="financed_amount" class="form-label">Financed Amount</label>
                     <input type="text" class="form-control" id="financed_amount"  name="financed_amount" placeholder="Financed Amount">
                 </div>
+
+
+            <div class="employeeHeader">
+                <h3>Employee Details</h3>
+            </div>
                 <div class="mb-3">
                     <label for="empID" class="form-label">Employee ID</label>
                     <input type="text" class="form-control" id="empID"  name="empID" placeholder="empID">
@@ -67,6 +109,11 @@ body {
                     <label for="e_phone" class="form-label">Employee Phone</label>
                     <input type="text" class="form-control" id="e_phone"  name="e_phone" placeholder="phone">
                 </div>
+
+
+            <div class="customerHeader">
+                <h3>Customer Details</h3>
+            </div>
                 <div class="mb-3">
                     <label for="customer_ID" class="form-label">Customer ID</label>
                     <input type="text" class="form-control" id="customer_ID"  name="customer_ID" placeholder="customer_ID">
@@ -104,6 +151,10 @@ body {
                     <input type="text" class="form-control" id="creditScore"  name="creditScore" placeholder="creditScore">
                 </div>
 
+
+            <div class="carHeader">
+                <h3>Car Details</h3>
+            </div>
                 <div class="mb-3">
                     <label for="VIN" class="form-label">VIN</label>
                     <input type="text" class="form-control" id="VIN"  name="VIN" placeholder="VIN">
@@ -126,6 +177,9 @@ body {
                 </div>
 
 
+            <div class="employmentHeader">
+                <h3>Employment Details</h3>
+            </div>
                 <div class="mb-3">
                     <label for="employerName" class="form-label">Employer Name</label>
                     <input type="text" class="form-control" id="employerName"  name="employerName" placeholder="Employer Name">
