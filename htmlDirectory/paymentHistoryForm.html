@@ -3,8 +3,37 @@
     <title>Payment History Details</title>
 
 </head>
+<style>
+
+body {
+    height: 1500px;
+  background: linear-gradient(lawngreen, cyan, white);
+}
+
+.mb-3 {
+    padding: 5px;
+    color: indigo;
+    text-align: center;
+}
+
+.bigTitle{
+    padding: 5px;
+    color: indigo;
+    text-align: center;
+}
+
+
+.button {
+    padding: 5px;
+    text-align: center;
+}
+
+</style>
 <body>
-    <h1> Form 4 Draft </h1>
+    <div class="bigTitle">
+        <h1> Payment History Form </h1>
+        <p>Please fill out the fields below to update Payment History for a Customer.</p>
+    </div>
         <form action="http://127.0.0.1:8000/createPaymentHistory" method="post">
                 <div class="mb-3">
                     <label for="taxpayerID" class="form-label">Taxpayer ID</label>
@@ -23,7 +52,9 @@
                     <input type="text" class="form-control" id="bank"  name="bank" placeholder="Bank Account">
                 </div>
 
-                <input type="submit" class="btn btn-primary"> &nbsp;&nbsp;&nbsp;&nbsp;<input type="reset" class="btn btn-danger">
+               <div class="button">
+                    <input type="submit" class="btn btn-primary"> &nbsp;&nbsp;&nbsp;&nbsp;<input type="reset" class="btn btn-danger">
+               </div>
            </form>
         </div>
     </div>

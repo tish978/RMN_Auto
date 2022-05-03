@@ -4,19 +4,148 @@
     <meta charset="UTF-8">
     <title>TEST</title>
 </head>
-<body>
-<h1> All Sold Cars Report </h1>
+<style>
+    body {
+    height: 1500px;
+  background: linear-gradient(purple, navajowhite, yellow);
+}
 
+.mb-3 {
+    padding: 5px;
+    color: yellow;
+    text-align: center;
+}
+
+.bigTitle{
+    padding: 5px;
+    color: yellow;
+    text-align: center;
+}
+
+
+.tableContents {
+    padding: 5px;
+    text-align: center;
+    color: white;
+}
+
+.tableHeader {
+    padding: 5px;
+    text-align: center;
+    color: white;
+}
+
+.customer_ID {
+    padding: 5px;
+    text-align: center;
+    color: black;
+    background-color: yellow;
+    font-weight: bold;
+}
+
+.VIN {
+    padding: 5px;
+    text-align: center;
+    color: black;
+    background-color: yellow;
+    font-weight: bold;
+}
+
+.condition {
+    padding: 5px;
+    text-align: center;
+    color: black;
+    background-color: yellow;
+    font-weight: bold;
+}
+
+.sale_price {
+    padding: 5px;
+    text-align: center;
+    color: black;
+    background-color: yellow;
+    font-weight: bold;
+}
+
+
+.interior_color {
+    padding: 5px;
+    text-align: center;
+    color: black;
+    background-color: yellow;
+    font-weight: bold;
+}
+
+.miles {
+    padding: 5px;
+    text-align: center;
+    color: black;
+    background-color: yellow;
+    font-weight: bold;
+}
+
+.list_price {
+    padding: 5px;
+    text-align: center;
+    color: black;
+    background-color: yellow;
+    font-weight: bold;
+}
+
+.style {
+    padding: 5px;
+    text-align: center;
+    color: black;
+    background-color: yellow;
+    font-weight: bold;
+}
+
+.warranty_ID {
+    padding: 5px;
+    text-align: center;
+    color: black;
+    background-color: yellow;
+    font-weight: bold;
+}
+
+
+</style>
+<body>
+<div class="bigTitle">
+    <h1> All Sold Cars Report </h1>
+    <p>Sold Car Results:</p>
+</div>
+
+<div class="tableHeader">
     <table cellspacing="3" border="1" style="width:100%">
         <tr>
-            <th>Sold Cars Results</th>
+            <th class="customer_ID">Customer ID</th>
+            <th class="VIN">VIN</th>
+            <th class="condition">Condition</th>
+            <th class="sale_price">Sale Price</th>
+            <th class="interior_color">Interior Color</th>
+            <th class="miles">Miles</th>
+            <th class="list_price">List Price</th>
+            <th class="style">Style</th>
+            <th class="warranty_ID">Warranty ID</th>
 
-            <tr>
-                <td>{{results}}</td>
-            </tr>
+            {% for result in results %}
+                    <tr>
+                        <td>{{result.customer_ID}}</td>
+                        <td>{{result.VIN}}</td>
+                        <td>{{result.condition}}</td>
+                        <td>{{result.sale_price}}</td>
+                        <td>{{result.interior_color}}</td>
+                        <td>{{result.miles}}</td>
+                        <td>{{result.list_price}}</td>
+                        <td>{{result.style}}</td>
+                        <td>{{result.warranty_ID}}</td>
+                    </tr>
+            {% endfor %}
 
         </tr>
     </table>
+</div>
 
 
 

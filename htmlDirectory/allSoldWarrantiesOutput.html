@@ -4,19 +4,200 @@
     <meta charset="UTF-8">
     <title>TEST</title>
 </head>
-<body>
-<h1> All Sold Warranties Report </h1>
+<style>
 
+body {
+    height: 1500px;
+  background: linear-gradient(yellow, rosybrown, lavender);
+}
+
+.mb-3 {
+    padding: 5px;
+    color: brown;
+    text-align: center;
+}
+
+.bigTitle{
+    padding: 5px;
+    color: brown;
+    text-align: center;
+}
+
+
+.tableContents {
+    padding: 5px;
+    text-align: center;
+    color: white;
+}
+
+.tableHeader {
+    padding: 5px;
+    text-align: center;
+    color: indigo;
+}
+
+.warranty_ID {
+    padding: 5px;
+    text-align: center;
+    color: white;
+    background-color: brown;
+    font-weight: bold;
+}
+
+.co_signer {
+    padding: 5px;
+    text-align: center;
+    color: white;
+    background-color: brown;
+    font-weight: bold;
+}
+
+.warranty_sale_date {
+    padding: 5px;
+    text-align: center;
+    color: white;
+    background-color: brown;
+    font-weight: bold;
+}
+
+
+.total_cost {
+    padding: 5px;
+    text-align: center;
+    color: white;
+    background-color: brown;
+    font-weight: bold;
+}
+
+
+.monthly_cost {
+    padding: 5px;
+    text-align: center;
+    color: white;
+    background-color: brown;
+    font-weight: bold;
+}
+
+.customer_warranty_number {
+    padding: 5px;
+    text-align: center;
+    color: white;
+    background-color: brown;
+    font-weight: bold;
+}
+
+.warranty_start_date {
+    padding: 5px;
+    text-align: center;
+    color: white;
+    background-color: brown;
+    font-weight: bold;
+}
+
+
+.warranty_length {
+    padding: 5px;
+    text-align: center;
+    color: white;
+    background-color: brown;
+    font-weight: bold;
+}
+
+.warranty_cost {
+    padding: 5px;
+    text-align: center;
+    color: white;
+    background-color: brown;
+    font-weight: bold;
+}
+
+.warranty_deductible {
+    padding: 5px;
+    text-align: center;
+    color: white;
+    background-color: brown;
+    font-weight: bold;
+}
+
+.items_covered {
+    padding: 5px;
+    text-align: center;
+    color: white;
+    background-color: brown;
+    font-weight: bold;
+}
+
+
+.VIN {
+    padding: 5px;
+    text-align: center;
+    color: white;
+    background-color: brown;
+    font-weight: bold;
+}
+
+.customerID {
+    padding: 5px;
+    text-align: center;
+    color: white;
+    background-color: brown;
+    font-weight: bold;
+}
+
+
+.salesperson_ID {
+    padding: 5px;
+    text-align: center;
+    color: white;
+    background-color: brown;
+    font-weight: bold;
+}
+
+</style>
+<body>
+<div class="bigTitle">
+    <h1> All Sold Warranties Report </h1>
+    <p>Sold Warranties Results:</p>
+</div>
+<div class="tableHeader">
     <table cellspacing="3" border="1" style="width:100%">
         <tr>
-            <th>Sold Warranties Results</th>
+            <th class="warranty_ID">Warranty ID</th>
+            <th class="co_signer">Co-Signer</th>
+            <th class="warranty_sale_date">Warranty Sale Date</th>
+            <th class="total_cost">Total Cost</th>
+            <th class="monthly_cost">Monthly Cost</th>
+            <th class="customer_warranty_number">Customer Warranty Number</th>
+            <th class="warranty_start_date">Warranty Start Date</th>
+            <th class="warranty_length">Warranty Length</th>
+            <th class="warranty_cost">Warranty Cost</th>
+            <th class="warranty_deductible">Warranty Deductible</th>
+            <th class="items_covered">Items Covered</th>
+            <th class="VIN">VIN</th>
+            <th class="customerID">Customer ID</th>
+            <th class="salesperson_ID">Salesperson ID</th>
 
+            {% for result in results %}
             <tr>
-                <td>{{results}}</td>
+                <td>{{result.warranty_ID}}</td>
+                <td>{{result.co_signer}}</td>
+                <td>{{result.warranty_sale_date}}</td>
+                <td>{{result.total_cost}}</td>
+                <td>{{result.monthly_cost}}</td>
+                <td>{{result.customer_warranty_number}}</td>
+                <td>{{result.warranty_start_date}}</td>
+                <td>{{result.warranty_length}}</td>
+                <td>{{result.warranty_cost}}</td>
+                <td>{{result.warranty_deductible}}</td>
+                <td>{{result.items_covered}}</td>
+                <td>{{result.VIN}}</td>
+                <td>{{result.customerID}}</td>
+                <td>{{result.salesperson_ID}}</td>
             </tr>
-
+        {% endfor %}
         </tr>
     </table>
+</div>
 
 
 

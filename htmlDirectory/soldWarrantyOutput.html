@@ -4,28 +4,189 @@
     <meta charset="UTF-8">
     <title>TEST</title>
 </head>
+<style>
+
+body {
+    height: 1500px;
+  background: linear-gradient(yellow, rosybrown, lavender);
+}
+
+.mb-3 {
+    padding: 5px;
+    color: brown;
+    text-align: center;
+}
+
+.bigTitle{
+    padding: 5px;
+    color: brown;
+    text-align: center;
+}
+
+
+.tableContents {
+    padding: 5px;
+    text-align: center;
+    color: brown;
+}
+
+.tableHeader {
+    padding: 5px;
+    text-align: center;
+    color: brown;
+}
+
+.warrantyID {
+    padding: 5px;
+    text-align: center;
+    color: white;
+    background-color: brown;
+    font-weight: bold;
+}
+
+.co_signer {
+    padding: 5px;
+    text-align: center;
+    color: white;
+    background-color: brown;
+    font-weight: bold;
+}
+
+.totalCost {
+    padding: 5px;
+    text-align: center;
+    color: white;
+    background-color: brown;
+    font-weight: bold;
+}
+
+
+.monthlyCost {
+    padding: 5px;
+    text-align: center;
+    color: white;
+    background-color: brown;
+    font-weight: bold;
+}
+
+.customerWarrantyNumber {
+     padding: 5px;
+    text-align: center;
+    color: white;
+    background-color: brown;
+    font-weight: bold;
+}
+
+.warrantyStartDate {
+     padding: 5px;
+    text-align: center;
+    color: white;
+    background-color: brown;
+    font-weight: bold;
+}
+
+.warrantyLength {
+     padding: 5px;
+    text-align: center;
+    color: white;
+    background-color: brown;
+    font-weight: bold;
+}
+
+.warrantyDeductible {
+     padding: 5px;
+    text-align: center;
+    color: white;
+    background-color: brown;
+    font-weight: bold;
+}
+
+
+.itemsCovered {
+     padding: 5px;
+    text-align: center;
+    color: white;
+    background-color: brown;
+    font-weight: bold;
+}
+
+.VIN {
+     padding: 5px;
+    text-align: center;
+    color: white;
+    background-color: brown;
+    font-weight: bold;
+}
+
+
+.customer_ID {
+     padding: 5px;
+    text-align: center;
+    color: white;
+    background-color: brown;
+    font-weight: bold;
+}
+
+.salesperson_ID {
+     padding: 5px;
+    text-align: center;
+    color: white;
+    background-color: brown;
+    font-weight: bold;
+}
+
+.itemsCovered {
+     padding: 5px;
+    text-align: center;
+    color: white;
+    background-color: brown;
+    font-weight: bold;
+}
+
+
+</style>
 <body>
-<h1> Sold Warranty Info: </h1>
-
-    <table cellspacing="3" border="1" style="width:100%">
-        <tr>
-            <th>Sold Warranty</th>
-
+<div class="bigTitle">
+    <h1> Sold Warranty Info: </h1>
+    <p> Warranty Sale Results:</p>
+</div>
+    <div class="tableHeader">
+        <table cellspacing="3" border="1" style="width:100%">
             <tr>
-                <td> WarrantyID: {{results1.warranty_ID}}</td>
-                <td> Co-Signer: {{results1.co_signer}}</td>
-                <td> Total Cost: {{results1.total_cost}}</td>
-                <td> Monthly Cost: {{results1.monthly_cost}}</td>
-                <td> Customer Warranty Number: {{results1.customer_warranty_number}}</td>
-                <td> Warranty Length: {{results1.warranty_length}}</td>
-                <td> Warranty Deductible: {{results1.warranty_deductible}}</td>
-                <td> Items Covered: {{results1.items_covered}}</td>
-                <td> VIN: {{results1.VIN}}</td>
-                <td> customerID: {{results1.customerID}}</td>
-            </tr>
+                <th class="warrantyID">WarrantyID</th>
+                <th class="co_signer">Co-Signer</th>
+                <th class="totalCost">Total Cost</th>
+                <th class="monthlyCost">Monthly Cost</th>
+                <th class="customerWarrantyNumber">Customer Warranty Number</th>
+                <th class="warrantyStartDate">Warranty Start Date</th>
+                <th class="warrantyLength">Warranty Length</th>
+                <th class="warrantyDeductible">Warranty Deductible</th>
+                <th class="itemsCovered">Items Covered</th>
+                <th class="VIN">VIN</th>
+                <th class="customer_ID">Customer ID</th>
+                <th class="salesperson_ID">Salesperson ID</th>
+                <th class="itemsCovered">Items Covered</th>
 
-        </tr>
-    </table>
+                {% for result in results %}
+                <tr>
+                    <td> {{results1.warranty_ID}}</td>
+                    <td> {{results1.co_signer}}</td>
+                    <td> {{results1.total_cost}}</td>
+                    <td> {{results1.monthly_cost}}</td>
+                    <td> {{results1.customer_warranty_number}}</td>
+                    <td> {{results1.warranty_start_date}}</td>
+                    <td> {{results1.warranty_length}}</td>
+                    <td> {{results1.warranty_cost}}</td>
+                    <td> {{results1.warranty_deductible}}</td>
+                    <td> {{results1.items_covered}}</td>
+                    <td> {{results1.VIN}}</td>
+                    <td> {{results1.customerID}}</td>
+                    <td> {{results1.salesperson_ID}}</td>
+                </tr>
+                {% endfor %}}
+            </tr>
+        </table>
+    </div>
 
 
 </body>

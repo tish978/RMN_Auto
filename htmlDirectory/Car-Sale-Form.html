@@ -1,10 +1,39 @@
 <html>
 <head>
-    <title>Bank Details</title>
+    <title>Car Sale Details</title>
 
 </head>
+<style>
+
+body {
+    height: 1500px;
+  background: linear-gradient(purple, navajowhite, yellow);
+}
+
+.mb-3 {
+    padding: 5px;
+    color: black;
+    text-align: center;
+}
+
+.bigTitle{
+    padding: 5px;
+    color: black;
+    text-align: center;
+}
+
+
+.button {
+    padding: 5px;
+    text-align: center;
+}
+
+</style>
 <body>
-    <h1> Form 2 Draft </h1>
+<div class="bigTitle">
+    <h1> Car Sale Form </h1>
+    <p>Please fill out the fields below for the car you wish to sell.</p>
+</div>
         <form action="http://127.0.0.1:8000/createCarSale" method="post">
                 <div class="mb-3">
                     <label for="date" class="form-label">Date</label>
@@ -119,9 +148,11 @@
                 </div>
 
 
+                <div class="button">
+                    <input type="submit" class="btn btn-primary"> &nbsp;&nbsp;&nbsp;&nbsp;<input type="reset" class="btn btn-danger">
+                </div>
 
-                <input type="submit" class="btn btn-primary"> &nbsp;&nbsp;&nbsp;&nbsp;<input type="reset" class="btn btn-danger">
-           </form>
+        </form>
         </div>
     </div>
 </div>

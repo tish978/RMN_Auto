@@ -4,22 +4,98 @@
     <meta charset="UTF-8">
     <title>TEST</title>
 </head>
-<body>
-<h1> All Payment Histories Report </h1>
+<style>
 
+body {
+    height: 1500px;
+  background: linear-gradient(lawngreen, cyan, white);
+}
+
+.mb-3 {
+    padding: 5px;
+    color: indigo;
+    text-align: center;
+}
+
+.bigTitle{
+    padding: 5px;
+    color: indigo;
+    text-align: center;
+}
+
+
+.tableContents {
+    padding: 5px;
+    text-align: center;
+    color: white;
+}
+
+.tableHeader {
+    padding: 5px;
+    text-align: center;
+    color: indigo;
+}
+
+.taxpayerID {
+    padding: 5px;
+    text-align: center;
+    color: white;
+    background-color: indigo;
+    font-weight: bold;
+}
+
+.numberLatePayments {
+    padding: 5px;
+    text-align: center;
+    color: white;
+    background-color: indigo;
+    font-weight: bold;
+}
+
+.avgNumberDaysLate {
+    padding: 5px;
+    text-align: center;
+    color: white;
+    background-color: indigo;
+    font-weight: bold;
+}
+
+
+.bank {
+    padding: 5px;
+    text-align: center;
+    color: white;
+    background-color: indigo;
+    font-weight: bold;
+}
+
+
+</style>
+<body>
+<div class="bigTitle">
+    <h1> All Payment Histories Report </h1>
+    <p>Payment Histories Results:</p>
+</div>
+<div class="tableHeader">
     <table cellspacing="3" border="1" style="width:100%">
         <tr>
-            <th>Payment Histories Results</th>
+            <th class="taxpayerID">Taxpayer ID</th>
+            <th class="numberLatePayments">Number of Late Payments</th>
+            <th class="avgNumberDaysLate">Average Number of Days Late</th>
+            <th class="bank">Bank Account</th>
 
+            {% for result in results %}
             <tr>
-                <td>{{results}}</td>
-            </tr>
 
+                <td>{{result.taxpayerID}}</td>
+                <td>{{result.number_late_payments}}</td>
+                <td>{{result.average_number_days_late}}</td>
+                <td>{{result.bank}}</td>
+            </tr>
+        {% endfor %}
         </tr>
     </table>
-
-
-
+</div>
 
 </body>
 </html>

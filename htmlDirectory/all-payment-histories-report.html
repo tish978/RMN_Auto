@@ -3,14 +3,127 @@
     <title>Payment History Details</title>
 
 </head>
+<style>
+
+body {
+    height: 1500px;
+  background: linear-gradient(lawngreen, cyan, white);
+}
+
+.mb-3 {
+    padding: 5px;
+    color: indigo;
+    text-align: center;
+}
+
+.bigTitle{
+    padding: 5px;
+    color: indigo;
+    text-align: center;
+}
+
+
+.button {
+    padding: 5px;
+    text-align: center;
+}
+
+
+.tableHeader {
+    padding: 5px;
+    text-align: center;
+    color: white;
+}
+
+.customer_ID {
+    padding: 5px;
+    text-align: center;
+    color: black;
+    background-color: yellow;
+    font-weight: bold;
+}
+
+.VIN {
+    padding: 5px;
+    text-align: center;
+    color: black;
+    background-color: yellow;
+    font-weight: bold;
+}
+
+.condition {
+    padding: 5px;
+    text-align: center;
+    color: black;
+    background-color: yellow;
+    font-weight: bold;
+}
+
+.sale_price {
+    padding: 5px;
+    text-align: center;
+    color: black;
+    background-color: yellow;
+    font-weight: bold;
+}
+
+
+.interior_color {
+    padding: 5px;
+    text-align: center;
+    color: black;
+    background-color: yellow;
+    font-weight: bold;
+}
+
+.miles {
+    padding: 5px;
+    text-align: center;
+    color: black;
+    background-color: yellow;
+    font-weight: bold;
+}
+
+.list_price {
+    padding: 5px;
+    text-align: center;
+    color: black;
+    background-color: yellow;
+    font-weight: bold;
+}
+
+.style {
+    padding: 5px;
+    text-align: center;
+    color: black;
+    background-color: yellow;
+    font-weight: bold;
+}
+
+.warranty_ID {
+    padding: 5px;
+    text-align: center;
+    color: black;
+    background-color: yellow;
+    font-weight: bold;
+}
+
+
+</style>
 <body>
-    <h1> All Payment Histories Report </h1>
+    <div class="bigTitle">
+        <h1> All Payment Histories Report </h1>
+        <p>Optionally enter field below to view information on Payment Histories</p>
+    </div>
         <form action="http://127.0.0.1:8000/getAllPaymentHistories" method="post">
             <div class="mb-3">
                     <label for="customer_ID" class="form-label">Customer ID: </label>
                     <input type="text" class="form-control" id="customer_ID"  name="customer_ID" placeholder="Customer ID">
             </div>
-            <input type="submit" class="btn btn-primary"> &nbsp;&nbsp;&nbsp;&nbsp;<input type="reset" class="btn btn-danger">
+
+            <div class="button">
+                <input type="submit" class="btn btn-primary"> &nbsp;&nbsp;&nbsp;&nbsp;<input type="reset" class="btn btn-danger">
+            </div>
         </form>
 </body>
 </html>

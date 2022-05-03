@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>TEST</title>
+</head>
+<style>
+
+body {
+    height: 1500px;
+  background: linear-gradient(darkkhaki,white,tan);
+}
+
+.mb-3 {
+    padding: 5px;
+    color: blue;
+    text-align: center;
+}
+
+.bigTitle{
+    padding: 5px;
+    color: blue;
+    text-align: center;
+}
+
+
+.tableContents {
+    padding: 5px;
+    text-align: center;
+    color: white;
+}
+
+.tableHeader {
+    padding: 5px;
+    text-align: center;
+    color: blue;
+}
+
+.taxpayerID {
+    padding: 5px;
+    text-align: center;
+    color: white;
+    background-color: blue;
+    font-weight: bold;
+}
+
+.numberLatePayments {
+    padding: 5px;
+    text-align: center;
+    color: white;
+    background-color: blue;
+    font-weight: bold;
+}
+
+.avgNumberDaysLate {
+    padding: 5px;
+    text-align: center;
+    color: white;
+    background-color: blue;
+    font-weight: bold;
+}
+
+
+.bank {
+    padding: 5px;
+    text-align: center;
+    color: white;
+    background-color: blue;
+    font-weight: bold;
+}
+
+
+</style>
+
+<body>
+<div class="bigTitle">
+    <h1> Employment Info Report </h1>
+    <p>Employment Info Results:</p>
+</div>
+<div class="tableHeader">
+
+    <table cellspacing="3" border="1" style="width:100%">
+        <tr>
+            <th class="employmentID">Employment ID</th>
+            <th class="employerName">Employer Name</th>
+            <th class="jobTitle">Job Title</th>
+            <th class="supervisorName">Supervisor Name</th>
+            <th class="supervisorPhone">Supervisor Phone</th>
+            <th class="employmentAddress">Employment Address</th>
+            <th class="employmentStartDate">Employment Start Date</th>
+            <th class="customerID">Customer ID</th>
+
+        {% for result in results %}
+            <tr>
+                <td>{{result.employmentID}}</td>
+                <td>{{result.employerName}}</td>
+                <td>{{result.jobTitle}}</td>
+                <td>{{result.supervisorName}}</td>
+                <td>{{result.supervisorPhone}}</td>
+                <td>{{result.employmentAddress}}</td>
+                <td>{{result.employmentStartDate}}</td>
+                <td>{{result.customerID}}</td>
+            </tr>
+        {% endfor %}
+
+        </tr>
+    </table>
+</div>
+
+
+</body>
+</html>

@@ -33,8 +33,74 @@ body {
 .tableHeader {
     padding: 5px;
     text-align: center;
-    color: aqua;
+    color: white;
 }
+
+.year {
+    padding: 5px;
+    text-align: center;
+    color: black;
+    background-color: yellow;
+    font-weight: bold;
+}
+
+.VIN {
+    padding: 5px;
+    text-align: center;
+    color: black;
+    background-color: yellow;
+    font-weight: bold;
+}
+
+.Miles {
+    padding: 5px;
+    text-align: center;
+    color: black;
+    background-color: yellow;
+    font-weight: bold;
+}
+
+
+.PricePaid {
+    padding: 5px;
+    text-align: center;
+    color: black;
+    background-color: yellow;
+    font-weight: bold;
+}
+
+.Make {
+    padding: 5px;
+    text-align: center;
+    color: black;
+    background-color: yellow;
+    font-weight: bold;
+}
+
+.Model {
+    padding: 5px;
+    text-align: center;
+    color: black;
+    background-color: yellow;
+    font-weight: bold;
+}
+
+.Color {
+    padding: 5px;
+    text-align: center;
+    color: black;
+    background-color: yellow;
+    font-weight: bold;
+}
+
+.BookPrice {
+    padding: 5px;
+    text-align: center;
+    color: black;
+    background-color: yellow;
+    font-weight: bold;
+}
+
 
 </style>
 <body>
@@ -45,14 +111,14 @@ body {
     <div class="tableHeader">
         <table cellspacing="3" border="1" style="width:100%">
             <tr>
-                <th>Year</th>
-                <th>VIN</th>
-                <th>Miles</th>
-                <th>Price Paid</th>
-                <th>Make</th>
-                <th>Model</th>
-                <th>Color</th>
-                <th>Book Price</th>
+                <th class="year">Year</th>
+                <th class="VIN">VIN</th>
+                <th class="Miles">Miles</th>
+                <th class="PricePaid">Price Paid</th>
+                <th class="Make">Make</th>
+                <th class="Model">Model</th>
+                <th class="Color">Color</th>
+                <th class="BookPrice">Book Price</th>
 
                 {% for result in results %}
                     <tr>
@@ -65,7 +131,7 @@ body {
                         <td>{{result.color}}</td>
                         <td>{{result.book_price}}</td>
                     </tr>
-                    {% endfor %}
+                {% endfor %}
                     </tr>
             </table>
     </div>

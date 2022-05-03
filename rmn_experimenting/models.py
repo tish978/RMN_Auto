@@ -136,3 +136,4 @@ class soldWarranty(SQLModel, table=True):
     items_covered: str
     VIN: int
     customerID: int
+    salesperson_ID: int

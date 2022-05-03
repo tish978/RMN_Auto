@@ -4,20 +4,116 @@
     <meta charset="UTF-8">
     <title>TEST</title>
 </head>
-<body>
-<h1> All Credit Scores Report </h1>
+<style>
 
+body {
+    height: 1500px;
+  background: linear-gradient(darkcyan,white,cyan);
+}
+
+.mb-3 {
+    padding: 5px;
+    color: darkkhaki;
+    text-align: center;
+}
+
+.bigTitle{
+    padding: 5px;
+    color: darkkhaki;
+    text-align: center;
+}
+
+
+.button {
+    padding: 5px;
+    text-align: center;
+}
+
+
+.tableHeader {
+    padding: 5px;
+    text-align: center;
+    color: black;
+}
+
+.customer_ID {
+    padding: 5px;
+    text-align: center;
+    color: black;
+    background-color: darkkhaki;
+    font-weight: bold;
+}
+
+.customer_ID {
+    padding: 5px;
+    text-align: center;
+    color: black;
+    background-color: darkkhaki;
+    font-weight: bold;
+}
+
+.first_name {
+    padding: 5px;
+    text-align: center;
+    color: black;
+    background-color: darkkhaki;
+    font-weight: bold;
+}
+
+.last_name {
+    padding: 5px;
+    text-align: center;
+    color: black;
+    background-color: darkkhaki;
+    font-weight: bold;
+}
+
+
+.taxpayerID {
+    padding: 5px;
+    text-align: center;
+    color: black;
+    background-color: darkkhaki;
+    font-weight: bold;
+}
+
+.creditScore {
+    padding: 5px;
+    text-align: center;
+    color: black;
+    background-color: darkkhaki;
+    font-weight: bold;
+}
+
+
+</style>
+<body>
+<div class="bigTitle">
+    <h1> All Credit Scores Report </h1>
+    <p>Credit Scores Results:</p>
+</div>
+<div class="tableHeader">
     <table cellspacing="3" border="1" style="width:100%">
         <tr>
-            <th>Credit Scores Results</th>
+            <th class="customer_ID">Customer ID</th>
+            <th class="first_name">First Name</th>
+            <th class="last_name">Last Name</th>
+            <th class="taxpayerID">Taxpayer ID</th>
+            <th class="creditScore">Credit Score</th>
 
+        {% for result in results %}
             <tr>
-                <td>{{results}}</td>
+                <td>{{result.customer_ID}}</td>
+                <td>{{result.first_name}}</td>
+                <td>{{result.last_name}}</td>
+                <td>{{result.taxpayerID}}</td>
+                <td>{{result.creditScore}}</td>
             </tr>
+        {% endfor %}
 
         </tr>
     </table>
-
+</div>
 
 
 

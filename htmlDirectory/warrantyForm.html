@@ -3,16 +3,111 @@
     <title>Sold Warranty Details</title>
 
 </head>
+<style>
+
+body {
+    height: 1500px;
+  background: linear-gradient(yellow, rosybrown, lavender);
+}
+
+.mb-3 {
+    padding: 5px;
+    color: brown;
+    text-align: center;
+}
+
+.bigTitle{
+    padding: 5px;
+    color: brown;
+    text-align: center;
+}
+
+
+.button {
+    padding: 5px;
+    text-align: center;
+}
+
+</style>
 <body>
-    <h1> Form 3 Draft </h1>
+    <div class="bigTitle">
+        <h1> Sell Warranty </h1>
+        <p>Please fill out the fields below for the Warranty you wish to Sell.</p>
+    </div>
         <form action="http://127.0.0.1:8000/createWarrantySale" method="post">
                 <div class="mb-3">
                     <label for="VIN" class="form-label">VIN</label>
                     <input type="text" class="form-control" id="VIN"  name="VIN" placeholder="VIN">
                 </div>
 
-                <input type="submit" class="btn btn-primary"> &nbsp;&nbsp;&nbsp;&nbsp;<input type="reset" class="btn btn-danger">
-           </form>
+                <div class="mb-3">
+                    <label for="co_signer" class="form-label">Co-Signer</label>
+                    <input type="text" class="form-control" id="co_signer"  name="co_signer" placeholder="Co-Signer">
+                </div>
+
+                <div class="mb-3">
+                    <label for="warranty_sale_date" class="form-label">Sale Date</label>
+                    <input type="text" class="form-control" id="warranty_sale_date"  name="warranty_sale_date" placeholder="Today's Date">
+                </div>
+
+                <div class="mb-3">
+                    <label for="total_cost" class="form-label">Total Cost</label>
+                    <input type="text" class="form-control" id="total_cost"  name="total_cost" placeholder="Total Cost">
+                </div>
+
+                <div class="mb-3">
+                    <label for="monthly_cost" class="form-label">Monthly Cost</label>
+                    <input type="text" class="form-control" id="monthly_cost"  name="monthly_cost" placeholder="Monthly Cost">
+                </div>
+
+                <div class="mb-3">
+                    <label for="customer_warranty_number" class="form-label">Customer Warranty Number</label>
+                    <input type="text" class="form-control" id="customer_warranty_number"  name="customer_warranty_number" placeholder="Customer Warranty Number">
+                </div>
+
+                <div class="mb-3">
+                    <label for="warranty_start_date" class="form-label">Warranty Start Date</label>
+                    <input type="text" class="form-control" id="warranty_start_date"  name="warranty_start_date" placeholder="Warranty Start Date">
+                </div>
+
+                <div class="mb-3">
+                    <label for="warranty_length" class="form-label">Warranty Length</label>
+                    <input type="text" class="form-control" id="warranty_length"  name="warranty_length" placeholder="Number of Months">
+                </div>
+
+                <div class="mb-3">
+                    <label for="warranty_cost" class="form-label">Warranty Cost</label>
+                    <input type="text" class="form-control" id="warranty_cost"  name="warranty_cost" placeholder="Warranty Cost">
+                </div>
+
+                <div class="mb-3">
+                    <label for="warranty_deductible" class="form-label">Warranty Deductible</label>
+                    <input type="text" class="form-control" id="warranty_deductible"  name="warranty_deductible" placeholder="Warranty Deductible">
+                </div>
+
+
+                <div class="mb-3">
+                    <label for="items_covered" class="form-label">Items Covered</label>
+                    <input type="text" class="form-control" id="items_covered"  name="items_covered" placeholder="Items Covered">
+                </div>
+
+
+                <div class="mb-3">
+                    <label for="customer_ID" class="form-label">Customer ID</label>
+                    <input type="text" class="form-control" id="customer_ID"  name="customer_ID" placeholder="Customer ID">
+                </div>
+
+
+                <div class="mb-3">
+                    <label for="salesperson_ID" class="form-label">Salesperson ID</label>
+                    <input type="text" class="form-control" id="salesperson_ID"  name="salesperson_ID" placeholder="Salesperson ID">
+                </div>
+
+
+                <div class="button">
+                    <input type="submit" class="btn btn-primary"> &nbsp;&nbsp;&nbsp;&nbsp;<input type="reset" class="btn btn-danger">
+                </div>
+        </form>
         </div>
     </div>
 </div>

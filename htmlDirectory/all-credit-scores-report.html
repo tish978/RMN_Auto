@@ -3,14 +3,47 @@
     <title>Credit Score Details</title>
 
 </head>
+<style>
+
+body {
+    height: 1500px;
+  background: linear-gradient(darkcyan,white,cyan);
+}
+
+.mb-3 {
+    padding: 5px;
+    color: darkkhaki;
+    text-align: center;
+}
+
+.bigTitle{
+    padding: 5px;
+    color: darkkhaki;
+    text-align: center;
+}
+
+
+.button {
+    padding: 5px;
+    text-align: center;
+}
+
+</style>
 <body>
-    <h1> Credit Score Report </h1>
+     <div class="bigTitle">
+        <h1> All Credit Scores Report </h1>
+        <p>Optionally enter field below to view information on Credit Score(s)</p>
+    </div>
         <form action="http://127.0.0.1:8000/getCreditScores" method="post">
             <div class="mb-3">
                     <label for="customer_ID" class="form-label">Customer ID: </label>
                     <input type="text" class="form-control" id="customer_ID"  name="customer_ID" placeholder="Customer ID">
             </div>
-            <input type="submit" class="btn btn-primary"> &nbsp;&nbsp;&nbsp;&nbsp;<input type="reset" class="btn btn-danger">
+
+            <div class="button">
+                <input type="submit" class="btn btn-primary"> &nbsp;&nbsp;&nbsp;&nbsp;<input type="reset" class="btn btn-danger">
+            </div>
+
         </form>
 </body>
 </html>

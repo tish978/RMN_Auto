@@ -1,24 +1,24 @@
 <html>
 <head>
-    <title>Sold Cars Details</title>
+    <title>Employment Information Details</title>
 
 </head>
 <style>
 
 body {
     height: 1500px;
-  background: linear-gradient(purple, navajowhite, yellow);
+  background: linear-gradient(darkkhaki,white,tan);
 }
 
 .mb-3 {
     padding: 5px;
-    color: black;
+    color: blue;
     text-align: center;
 }
 
 .bigTitle{
     padding: 5px;
-    color: black;
+    color: blue;
     text-align: center;
 }
 
@@ -30,18 +30,20 @@ body {
 
 </style>
 <body>
-    <div class="bigTitle">
-        <h1> Sold Cars Report </h1>
-        <p>Optionally enter field below to view information on Sold Cars</p>
+     <div class="bigTitle">
+        <h1> Employment Information Report </h1>
+        <p>Optionally enter field below to view information on Employee(s)</p>
     </div>
-        <form action="http://127.0.0.1:8000/getAllSoldCars" method="post">
+        <form action="http://127.0.0.1:8000/getEmploymentInfo" method="post">
             <div class="mb-3">
                     <label for="customer_ID" class="form-label">Customer ID: </label>
                     <input type="text" class="form-control" id="customer_ID"  name="customer_ID" placeholder="Customer ID">
             </div>
+
             <div class="button">
                 <input type="submit" class="btn btn-primary"> &nbsp;&nbsp;&nbsp;&nbsp;<input type="reset" class="btn btn-danger">
             </div>
+
         </form>
 </body>
 </html>

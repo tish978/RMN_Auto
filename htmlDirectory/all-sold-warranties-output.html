@@ -3,14 +3,45 @@
     <title>Sold Warranties Details</title>
 
 </head>
+<style>
+
+body {
+    height: 1500px;
+  background: linear-gradient(yellow, rosybrown, lavender);
+}
+
+.mb-3 {
+    padding: 5px;
+    color: brown;
+    text-align: center;
+}
+
+.bigTitle{
+    padding: 5px;
+    color: brown;
+    text-align: center;
+}
+
+
+.button {
+    padding: 5px;
+    text-align: center;
+}
+
+</style>
 <body>
-    <h1> Sold Warranties Report </h1>
+    <div class="bigTitle">
+        <h1> Sold Warranties Report </h1>
+        <p>Optionally enter field below to view information on Sold Warranties.</p>
+    </div>
         <form action="http://127.0.0.1:8000/getAllSoldWarranties" method="post">
             <div class="mb-3">
                     <label for="make" class="form-label">Make: </label>
                     <input type="text" class="form-control" id="make"  name="make" placeholder="Make">
             </div>
-            <input type="submit" class="btn btn-primary"> &nbsp;&nbsp;&nbsp;&nbsp;<input type="reset" class="btn btn-danger">
+            <div class="button">
+                <input type="submit" class="btn btn-primary"> &nbsp;&nbsp;&nbsp;&nbsp;<input type="reset" class="btn btn-danger">
+            </div>
         </form>
 </body>
 </html>

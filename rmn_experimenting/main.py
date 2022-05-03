@@ -272,6 +272,27 @@ async def get_all_creditScores(request: Request, customer_ID: Optional[int] = No
         return templates.TemplateResponse("allCreditScoresOutput.html", {"request": request, "results": results})
 
 
+@app.post("/getEmploymentInfo", response_class=HTMLResponse)
+async def get_all_creditScores(request: Request, customer_ID: Optional[int] = None):
+    #statement=select(PurchasedCar).where(PurchasedCar.make == make)
+
+    if customer_ID:
+        print(customer_ID)
+        statement = select(employmentInfo).where(employmentInfo.customerID == customer_ID)
+        print(statement)
+        results=session.exec(statement).all()
+        print(results)
+
+        return templates.TemplateResponse("employmentInfoOutput.html", {"request": request, "results": results})
+    else:
+        statement = select(employmentInfo)
+        print(statement)
+        results = session.exec(statement).all()
+        print(results)
+
+        return templates.TemplateResponse("employmentInfoOutput.html", {"request": request, "results": results})
+
+
 
 
 @app.route("/purchasedCarsRequest2", methods=['GET', 'POST', 'PUT'])
@@ -429,10 +450,10 @@ def create_carSale(request: Request, date: str = Form(...), empID: int = Form(..
 
 
 @app.post("/createWarrantySale", response_class=HTMLResponse)
-def create_warranty(request: Request, VIN: int = Form(...), customer_ID: int = Form(...), co_signer: str = Form(...), total_cost: int = Form(...), monthly_cost: int = Form(...), salesperson: str = Form(...), phone: str = Form(...), warranty_number: int = Form(...), length: str = Form(...), cost: int = Form(...), deductible: int = Form(...), items_covered: str = Form(...)):
+def create_warranty(request: Request, VIN: int = Form(...), customer_ID: int = Form(...), co_signer: str = Form(...), total_cost: int = Form(...), monthly_cost: int = Form(...), salesperson_ID: int = Form(...), phone: str = Form(...), warranty_number: int = Form(...), warranty_start_date: str = Form(...), length: str = Form(...), cost: int = Form(...), deductible: int = Form(...), items_covered: str = Form(...)):
     print("VIN :" + str(VIN) + ", customer_ID:" + str(customer_ID) + ", co_signer:" + str(
-        co_signer) + "total_cost:" + str(total_cost) + ", customer_ID:" + str(customer_ID) + ", monthly_cost:" + str(monthly_cost) + ", salesperson:" + str(
-        salesperson) + ", phone:" + str(phone) + ", warranty_number :" + str(warranty_number) + ", length:" + str(length) + "cost :" + str(
+        co_signer) + "total_cost:" + str(total_cost) + ", customer_ID:" + str(customer_ID) + ", monthly_cost:" + str(monthly_cost) + ", salesperson_ID:" + str(
+        salesperson_ID) + ", phone:" + str(phone) + ", warranty_number :" + str(warranty_number) + ", warranty_start_date:" + str(warranty_start_date) + ", length:" + str(length) + "cost :" + str(
         cost) + ", deductible :" + str(deductible) + ", items_covered:" + str(items_covered))
 
     soldWarrantyQuery = session.query(func.max(soldWarranty.warranty_ID)).first()
@@ -452,9 +473,16 @@ def create_warranty(request: Request, VIN: int = Form(...), customer_ID: int = F
     print("Found Customer is: " + str(result2))
     new_customer_ID = result2.customer_ID
 
-    new_soldwarranty = soldWarranty(warranty_ID=new_soldWarrantyID, co_signer=co_signer, total_cost=total_cost, monthly_cost=monthly_cost, customer_warranty_number=warranty_number, warranty_length=length, warranty_cost=cost, warranty_deductible=deductible, items_covered=items_covered, VIN=new_VIN, customerID=new_customer_ID)
+    new_soldwarranty = soldWarranty(warranty_ID=new_soldWarrantyID, co_signer=co_signer, total_cost=total_cost, monthly_cost=monthly_cost, customer_warranty_number=warranty_number, warranty_start_date=warranty_start_date,warranty_length=length, warranty_cost=cost, warranty_deductible=deductible, items_covered=items_covered, VIN=new_VIN, customerID=new_customer_ID, salesperson_ID=salesperson_ID)
 
     print("Newly created Warranty: " + str(new_soldwarranty))
+
+    #statement3 = select(Salesperson).where(Salesperson.salesperson_ID == salesperson_ID)
+    #result3 = session.exec(statement3).first()
+    #print("Found Salesperson is: " + str(result3))
+    #result3.warranty_ID = new_soldWarrantyID
+
+
 
     session.add(new_soldwarranty)
     session.commit()
@@ -582,6 +610,15 @@ def formTwo_page(request: Request):
 @app.get("/createReport5", response_class=HTMLResponse)
 def formTwo_page(request: Request):
     return templates.TemplateResponse("all-payment-histories-report.html", {"request": request})
+
+@app.get("/creditScoreReport", response_class=HTMLResponse)
+def formTwo_page(request: Request):
+    return templates.TemplateResponse("all-credit-scores-report.html", {"request": request})
+
+@app.get("/employmentInfoCheck", response_class=HTMLResponse)
+def formTwo_page(request: Request):
+    return templates.TemplateResponse("employment-information-report.html", {"request": request})
+
 
 
 
