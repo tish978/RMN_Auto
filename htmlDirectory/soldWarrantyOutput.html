@@ -144,6 +144,83 @@ body {
 }
 
 
+
+.first_name {
+     padding: 5px;
+    text-align: center;
+    color: white;
+    background-color: brown;
+    font-weight: bold;
+}
+
+
+.last_name {
+     padding: 5px;
+    text-align: center;
+    color: white;
+    background-color: brown;
+    font-weight: bold;
+}
+
+
+.city {
+     padding: 5px;
+    text-align: center;
+    color: white;
+    background-color: brown;
+    font-weight: bold;
+}
+
+
+
+.state {
+     padding: 5px;
+    text-align: center;
+    color: white;
+    background-color: brown;
+    font-weight: bold;
+}
+
+
+
+.ZIP {
+     padding: 5px;
+    text-align: center;
+    color: white;
+    background-color: brown;
+    font-weight: bold;
+}
+
+
+
+.gender {
+     padding: 5px;
+    text-align: center;
+    color: white;
+    background-color: brown;
+    font-weight: bold;
+}
+
+
+.phone {
+     padding: 5px;
+    text-align: center;
+    color: white;
+    background-color: brown;
+    font-weight: bold;
+}
+
+
+
+.DOB {
+     padding: 5px;
+    text-align: center;
+    color: white;
+    background-color: brown;
+    font-weight: bold;
+}
+
+
 </style>
 <body>
 <div class="bigTitle">
@@ -151,6 +228,7 @@ body {
     <p> Warranty Sale Results:</p>
 </div>
     <div class="tableHeader">
+        <h3>Warranty Details</h3>
         <table cellspacing="3" border="1" style="width:100%">
             <tr>
                 <th class="warrantyID">WarrantyID</th>
@@ -165,9 +243,8 @@ body {
                 <th class="VIN">VIN</th>
                 <th class="customer_ID">Customer ID</th>
                 <th class="salesperson_ID">Salesperson ID</th>
-                <th class="itemsCovered">Items Covered</th>
 
-                {% for result in results %}
+
                 <tr>
                     <td> {{results1.warranty_ID}}</td>
                     <td> {{results1.co_signer}}</td>
@@ -176,16 +253,42 @@ body {
                     <td> {{results1.customer_warranty_number}}</td>
                     <td> {{results1.warranty_start_date}}</td>
                     <td> {{results1.warranty_length}}</td>
-                    <td> {{results1.warranty_cost}}</td>
                     <td> {{results1.warranty_deductible}}</td>
                     <td> {{results1.items_covered}}</td>
                     <td> {{results1.VIN}}</td>
                     <td> {{results1.customerID}}</td>
                     <td> {{results1.salesperson_ID}}</td>
                 </tr>
-                {% endfor %}}
-            </tr>
+
+
+
         </table>
+
+            <h3>Customer Details</h3>
+             <table cellspacing="3" border="1" style="width:100%">
+                 <tr>
+                <th class="first_name">First Name</th>
+                <th class="last_name">Last Name</th>
+                <th class="phone">Phone</th>
+                <th class="city">City</th>
+                <th class="state">State</th>
+                <th class="ZIP">ZIP</th>
+                <th class="gender">Gender</th>
+                <th class="DOB">Date of Birth</th>
+
+
+                <tr>
+                    <td> {{result2.first_name}}</td>
+                    <td> {{result2.last_name}}</td>
+                    <td> {{result2.phone}}</td>
+                    <td> {{result2.city}}</td>
+                    <td> {{result2.state}}</td>
+                    <td> {{result2.zip}}</td>
+                    <td> {{result2.gender}}</td>
+                    <td> {{result2.DOB}}</td>
+                </tr>
+
+             </table>
     </div>
 
 

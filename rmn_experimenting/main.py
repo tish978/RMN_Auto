@@ -160,7 +160,7 @@ def protected(username=Depends(auth_handler.auth_wrapper)):
 
 
 @app.post("/purchasedCarsRequest", response_class=HTMLResponse)
-async def get_all_purchasedCarsRequest(request: Request, make: Optional[str] = None):
+async def get_all_purchasedCarsRequest(request: Request, make: Optional[str] = Form(None)):
     #statement=select(PurchasedCar).where(PurchasedCar.make == make)
 
     #if len(tokens) > 0:
@@ -184,69 +184,123 @@ async def get_all_purchasedCarsRequest(request: Request, make: Optional[str] = N
        # print("No header!!!!!!!!!")
 
 @app.post("/getAllPaymentHistories", response_class=HTMLResponse)
-async def get_all_paymentHistories(request: Request, customer_ID: Optional[int] = None):
+async def get_all_paymentHistories(request: Request, customer_ID: Optional[int] = Form(None)):
     #statement=select(PurchasedCar).where(PurchasedCar.make == make)
 
     if customer_ID:
         print(customer_ID)
         statement = select(Customer).where(Customer.customer_ID == customer_ID)
-        taxpayerID = select(PaymentHistory).where(statement.having(Customer.taxpayerID))
-        print("TaxpayerID is: " + str(taxpayerID))
-        print(statement)
-        results=session.exec(statement).all()
+        results3=session.exec(statement).all()
+        print("Results3: " + str(results3))
+        taxpayerID = select(PaymentHistory).where(results3[0].taxpayerID == Customer.taxpayerID)
+        results4=session.exec(taxpayerID).all()
+        print("Results4: " + str(results4))
+
+
+        new_taxPayerID: int = None
+        for result_a in results4:
+            for result_b in results3:
+                if result_b.taxpayerID == result_a.taxpayerID:
+                    new_taxPayerID = result_b.taxpayerID
+           # if result.taxpayerID ==
+
+                                                  #.having(Customer.taxpayerID))
+        print("TaxpayerID is: " + str(new_taxPayerID))
+        newStatement = select(PaymentHistory).where(PaymentHistory.taxpayerID == new_taxPayerID)
+        #print(statement)
+        print(newStatement)
+        #results=session.exec(statement).all()
+        #print(results)
+        results = session.exec(newStatement).all()
         print(results)
 
-        return templates.TemplateResponse("allPaymentHistoriesOutput.html", {"request": request, "results": results})
+        statement2 = select(Customer).where(Customer.customer_ID == customer_ID)
+        print("statement2: " + str(statement2))
+        results2 = session.exec(statement2).all()
+        print("results2: " + str(results2))
+
+        return templates.TemplateResponse("allPaymentHistoriesOutput.html", {"request": request, "results": results, "results2": results2})
     else:
         statement = select(PaymentHistory)
         print(statement)
         results = session.exec(statement).all()
         print(results)
 
-        return templates.TemplateResponse("allPaymentHistoriesOutput.html", {"request": request, "results": results})
+        statement2 = select(Customer).where(PaymentHistory.taxpayerID == Customer.taxpayerID)
+        print("statement2: " + str(statement2))
+        results2 = session.exec(statement2).all()
+        print("results2: " + str(results2))
+
+        return templates.TemplateResponse("allPaymentHistoriesOutput.html", {"request": request, "results": results, "results2": results2})
 
 
 @app.post("/getAllSoldCars", response_class=HTMLResponse)
-async def get_all_soldCarsRequest(request: Request, customer_ID: Optional[int] = None):
+async def get_all_soldCarsRequest(request: Request, customer_ID: Optional[int] = Form(None)):
     #statement=select(PurchasedCar).where(PurchasedCar.make == make)
 
+
     if customer_ID:
+
+        statement2 = select(Customer).where(Customer.customer_ID == customer_ID)
+        print(statement2)
+        results2 = session.exec(statement2).all()
+        print(results2)
+
+
         print(customer_ID)
         statement = select(SoldCar).where(SoldCar.customer_ID == customer_ID)
         print(statement)
         results=session.exec(statement).all()
         print(results)
 
-        return templates.TemplateResponse("allSoldCarsOutput.html", {"request": request, "results": results})
+        return templates.TemplateResponse("allSoldCarsOutput.html", {"request": request, "results": results, "results2": results2})
     else:
+
+        statement2 = select(Customer).where(SoldCar.customer_ID == Customer.customer_ID)
+        print("statement2: " + str(statement2))
+        results2 = session.exec(statement2).all()
+        print(results2)
+
         statement = select(SoldCar)
         print(statement)
         results = session.exec(statement).all()
         print(results)
 
-        return templates.TemplateResponse("allSoldCarsOutput.html", {"request": request, "results": results})
+        return templates.TemplateResponse("allSoldCarsOutput.html", {"request": request, "results": results, "results2": results2})
 
 
 
 @app.post("/getAllSoldWarranties", response_class=HTMLResponse)
-async def get_all_getAllSoldWarranties(request: Request, customerID: Optional[int] = None):
+async def get_all_getAllSoldWarranties(request: Request, customer_ID: Optional[int] = Form(None)):
     #statement=select(PurchasedCar).where(PurchasedCar.make == make)
 
-    if customerID:
-        print(customerID)
-        statement = select(soldWarranty).where(soldWarranty.customerID == customerID)
-        print(statement)
+    if customer_ID:
+        #print(customerID)
+        statement = select(soldWarranty).where(soldWarranty.customerID == customer_ID)
+        #print(statement)
         results=session.exec(statement).all()
-        print(results)
+        #print(results)
 
-        return templates.TemplateResponse("allSoldWarrantiesOutput.html", {"request": request, "results": results})
+        statement2 = select(Customer).having(Customer.customer_ID == customer_ID)
+        #print("statement: " + str(statement2))
+        results2 = session.exec(statement2).all()
+        print("results2: " + str(results2))
+
+
+        return templates.TemplateResponse("allSoldWarrantiesOutput.html", {"request": request, "results": results, "results2": results2})
     else:
+
+        statement2 = select(Customer).where(soldWarranty.customerID == Customer.customer_ID)
+        print("statement2: " + str(statement2))
+        results2 = session.exec(statement2).all()
+        print(results2)
+
         statement = select(soldWarranty)
         print(statement)
         results = session.exec(statement).all()
         print(results)
 
-        return templates.TemplateResponse("allSoldWarrantiesOutput.html", {"request": request, "results": results})
+        return templates.TemplateResponse("allSoldWarrantiesOutput.html", {"request": request, "results": results, "results2": results2})
 
 
 
@@ -368,7 +422,7 @@ def create_bank(request: Request, bankAcct: int = Form(...), due: float = Form(.
 
 
 @app.post("/createPaymentHistory", response_class=HTMLResponse)
-def create_bank(request: Request, taxpayerID: int = Form(...), number_late_payments: int = Form(...), average_number_days_late: int = Form(...), bank: int = Form(...)):
+def create_bank(request: Request, taxpayerID: int = Form(None), number_late_payments: int = Form(...), average_number_days_late: int = Form(...), bank: int = Form(...)):
     print("taxpayerID :" + str(taxpayerID) + ", number_late_payments:" + str(number_late_payments) + ", average_number_days_late:" + str(average_number_days_late), "bank: " + str(bank))
     new_paymentHistory = PaymentHistory(taxpayerID=taxpayerID, number_late_payments=number_late_payments, average_number_days_late=average_number_days_late, bank=bank)
     session.add(new_paymentHistory)
@@ -376,7 +430,14 @@ def create_bank(request: Request, taxpayerID: int = Form(...), number_late_payme
     print("Successfully made a new Payment History record!")
     statement = select(PaymentHistory).where(PaymentHistory.taxpayerID == taxpayerID)
     results=session.exec(statement).all()
-    return templates.TemplateResponse("allPaymentHistoriesOutput.html", {"request": request, "results": results})
+
+    statement2 = select(Customer).where(Customer.taxpayerID == taxpayerID)
+    print("statement2: " + str(statement2))
+    results2 = session.exec(statement2).all()
+    print("results2: " + str(results2))
+
+
+    return templates.TemplateResponse("allPaymentHistoriesOutput.html", {"request": request, "results": results, "results2": results2})
 
 
 @app.post("/createCarSale", response_class=HTMLResponse)
@@ -449,11 +510,11 @@ def create_carSale(request: Request, date: str = Form(...), empID: int = Form(..
 
 
 @app.post("/createWarrantySale", response_class=HTMLResponse)
-def create_warranty(request: Request, VIN: int = Form(...), customer_ID: int = Form(...), co_signer: str = Form(...), total_cost: int = Form(...), monthly_cost: int = Form(...), salesperson_ID: int = Form(...), phone: str = Form(...), warranty_number: int = Form(...), warranty_start_date: str = Form(...), length: str = Form(...), cost: int = Form(...), deductible: int = Form(...), items_covered: str = Form(...)):
+def create_warranty(request: Request, VIN: int = Form(...), customer_ID: int = Form(...), co_signer: str = Form(...), total_cost: int = Form(...), monthly_cost: int = Form(...), salesperson_ID: int = Form(...), phone: Optional[str] = None, customer_warranty_number: int = Form(...), warranty_start_date: str = Form(...), warranty_length: str = Form(...), warranty_cost: int = Form(...), warranty_deductible: int = Form(...), items_covered: str = Form(...)):
     print("VIN :" + str(VIN) + ", customer_ID:" + str(customer_ID) + ", co_signer:" + str(
         co_signer) + "total_cost:" + str(total_cost) + ", customer_ID:" + str(customer_ID) + ", monthly_cost:" + str(monthly_cost) + ", salesperson_ID:" + str(
-        salesperson_ID) + ", phone:" + str(phone) + ", warranty_number :" + str(warranty_number) + ", warranty_start_date:" + str(warranty_start_date) + ", length:" + str(length) + "cost :" + str(
-        cost) + ", deductible :" + str(deductible) + ", items_covered:" + str(items_covered))
+        salesperson_ID) + ", phone:" + str(phone) + ", customer_warranty_number :" + str(customer_warranty_number) + ", warranty_start_date:" + str(warranty_start_date) + ", length:" + str(warranty_length) + "cost :" + str(
+        warranty_cost) + ", deductible :" + str(warranty_deductible) + ", items_covered:" + str(items_covered))
 
     soldWarrantyQuery = session.query(func.max(soldWarranty.warranty_ID)).first()
     new_soldWarrantyID: int = 0
@@ -472,7 +533,7 @@ def create_warranty(request: Request, VIN: int = Form(...), customer_ID: int = F
     print("Found Customer is: " + str(result2))
     new_customer_ID = result2.customer_ID
 
-    new_soldwarranty = soldWarranty(warranty_ID=new_soldWarrantyID, co_signer=co_signer, total_cost=total_cost, monthly_cost=monthly_cost, customer_warranty_number=warranty_number, warranty_start_date=warranty_start_date,warranty_length=length, warranty_cost=cost, warranty_deductible=deductible, items_covered=items_covered, VIN=new_VIN, customerID=new_customer_ID, salesperson_ID=salesperson_ID)
+    new_soldwarranty = soldWarranty(warranty_ID=new_soldWarrantyID, co_signer=co_signer, total_cost=total_cost, monthly_cost=monthly_cost, customer_warranty_number=customer_warranty_number, warranty_start_date=warranty_start_date,warranty_length=warranty_length, warranty_cost=warranty_cost, warranty_deductible=warranty_deductible, items_covered=items_covered, VIN=new_VIN, customerID=new_customer_ID, salesperson_ID=salesperson_ID)
 
     print("Newly created Warranty: " + str(new_soldwarranty))
 
@@ -487,7 +548,7 @@ def create_warranty(request: Request, VIN: int = Form(...), customer_ID: int = F
     session.commit()
 
     return templates.TemplateResponse("soldWarrantyOutput.html",
-                                      {"request": request, "results1": new_soldwarranty})
+                                      {"request": request, "results1": new_soldwarranty, "result2": result2})
 
 
 @app.post("/getBank", response_class=HTMLResponse)

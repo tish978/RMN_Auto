@@ -36,6 +36,14 @@ body {
     color: indigo;
 }
 
+.customer_ID {
+    padding: 5px;
+    text-align: center;
+    color: white;
+    background-color: brown;
+    font-weight: bold;
+}
+
 .warranty_ID {
     padding: 5px;
     text-align: center;
@@ -153,6 +161,67 @@ body {
     font-weight: bold;
 }
 
+
+
+.phone {
+    padding: 5px;
+    text-align: center;
+    color: white;
+    background-color: brown;
+    font-weight: bold;
+}
+
+.first_name {
+    padding: 5px;
+    text-align: center;
+    color: white;
+    background-color: brown;
+    font-weight: bold;
+}
+
+
+.last_name {
+    padding: 5px;
+    text-align: center;
+    color: white;
+    background-color: brown;
+    font-weight: bold;
+}
+
+.city {
+    padding: 5px;
+    text-align: center;
+    color: white;
+    background-color: brown;
+    font-weight: bold;
+}
+
+.state {
+    padding: 5px;
+    text-align: center;
+    color: white;
+    background-color: brown;
+    font-weight: bold;
+}
+
+.ZIP {
+    padding: 5px;
+    text-align: center;
+    color: white;
+    background-color: brown;
+    font-weight: bold;
+}
+
+.gender {
+    padding: 5px;
+    text-align: center;
+    color: white;
+    background-color: brown;
+    font-weight: bold;
+}
+
+
+
 </style>
 <body>
 <div class="bigTitle">
@@ -200,6 +269,35 @@ body {
 </div>
 
 
+<div class="tableHeader">
+    <h3> Customer Information </h3>
+    <table cellspacing="3" border="1" style="width:100%">
+        <tr>
+            <th class="customer_ID">Customer ID</th>
+            <th class="phone">phone</th>
+            <th class="first_name">First Name</th>
+            <th class="last_name">Last Name</th>
+            <th class="city">City</th>
+            <th class="state">State</th>
+            <th class="ZIP">ZIP</th>
+            <th class="gender">gender</th>
+
+            {% for result in results2 %}
+                    <tr>
+                        <td>{{result.customer_ID}}</td>
+                        <td>{{result.phone}}</td>
+                        <td>{{result.first_name}}</td>
+                        <td>{{result.last_name}}</td>
+                        <td>{{result.city}}</td>
+                        <td>{{result.state}}</td>
+                        <td>{{result.zip}}</td>
+                        <td>{{result.gender}}</td>
+                    </tr>
+            {% endfor %}
+
+        </tr>
+    </table>
+</div>
 
 
 </body>
