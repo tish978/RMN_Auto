@@ -61,13 +61,71 @@ body {
 }
 
 
-.bank {
+.employmentID {
     padding: 5px;
     text-align: center;
     color: white;
     background-color: blue;
     font-weight: bold;
 }
+
+.employerName {
+    padding: 5px;
+    text-align: center;
+    color: white;
+    background-color: blue;
+    font-weight: bold;
+}
+
+.jobTitle {
+    padding: 5px;
+    text-align: center;
+    color: white;
+    background-color: blue;
+    font-weight: bold;
+}
+
+.supervisorName {
+    padding: 5px;
+    text-align: center;
+    color: white;
+    background-color: blue;
+    font-weight: bold;
+}
+
+.supervisorPhone {
+    padding: 5px;
+    text-align: center;
+    color: white;
+    background-color: blue;
+    font-weight: bold;
+}
+
+.employmentAddress {
+    padding: 5px;
+    text-align: center;
+    color: white;
+    background-color: blue;
+    font-weight: bold;
+}
+
+
+.employmentStartDate {
+    padding: 5px;
+    text-align: center;
+    color: white;
+    background-color: blue;
+    font-weight: bold;
+}
+
+.customerID {
+    padding: 5px;
+    text-align: center;
+    color: white;
+    background-color: blue;
+    font-weight: bold;
+}
+
 
 
 </style>
@@ -90,6 +148,7 @@ body {
             <th class="employmentStartDate">Employment Start Date</th>
             <th class="customerID">Customer ID</th>
 
+
         {% for result in results %}
             <tr>
                 <td>{{result.employmentID}}</td>
@@ -100,6 +159,7 @@ body {
                 <td>{{result.employmentAddress}}</td>
                 <td>{{result.employmentStartDate}}</td>
                 <td>{{result.customerID}}</td>
+
             </tr>
         {% endfor %}
 

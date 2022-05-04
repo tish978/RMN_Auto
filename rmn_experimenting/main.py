@@ -305,7 +305,7 @@ async def get_all_getAllSoldWarranties(request: Request, customer_ID: Optional[i
 
 
 @app.post("/getCreditScores", response_class=HTMLResponse)
-async def get_all_creditScores(request: Request, customer_ID: Optional[int] = None):
+async def get_all_creditScores(request: Request, customer_ID: Optional[int] = Form(None)):
     #statement=select(PurchasedCar).where(PurchasedCar.make == make)
 
     if customer_ID:
@@ -326,7 +326,7 @@ async def get_all_creditScores(request: Request, customer_ID: Optional[int] = No
 
 
 @app.post("/getEmploymentInfo", response_class=HTMLResponse)
-async def get_all_creditScores(request: Request, customer_ID: Optional[int] = None):
+async def get_all_creditScores(request: Request, customer_ID: Optional[int] = Form(None)):
     #statement=select(PurchasedCar).where(PurchasedCar.make == make)
 
     if customer_ID:
@@ -422,8 +422,8 @@ def create_bank(request: Request, bankAcct: int = Form(...), due: float = Form(.
 
 
 @app.post("/createPaymentHistory", response_class=HTMLResponse)
-def create_bank(request: Request, taxpayerID: int = Form(None), number_late_payments: int = Form(...), average_number_days_late: int = Form(...), bank: int = Form(...)):
-    print("taxpayerID :" + str(taxpayerID) + ", number_late_payments:" + str(number_late_payments) + ", average_number_days_late:" + str(average_number_days_late), "bank: " + str(bank))
+def create_bank(request: Request, customerID: int = Form(...), taxpayerID: int = Form(None), number_late_payments: int = Form(...), average_number_days_late: int = Form(...), bank: int = Form(...)):
+    print("customerID: " + str(customerID) + ", taxpayerID :" + str(taxpayerID) + ", number_late_payments:" + str(number_late_payments) + ", average_number_days_late:" + str(average_number_days_late), "bank: " + str(bank))
     new_paymentHistory = PaymentHistory(taxpayerID=taxpayerID, number_late_payments=number_late_payments, average_number_days_late=average_number_days_late, bank=bank)
     session.add(new_paymentHistory)
     session.commit()
@@ -431,9 +431,12 @@ def create_bank(request: Request, taxpayerID: int = Form(None), number_late_paym
     statement = select(PaymentHistory).where(PaymentHistory.taxpayerID == taxpayerID)
     results=session.exec(statement).all()
 
-    statement2 = select(Customer).where(Customer.taxpayerID == taxpayerID)
+    #statement2 = select(Customer).where(Customer.taxpayerID == taxpayerID)
+    statement2 = select(Customer).where(Customer.customer_ID == customerID)
     print("statement2: " + str(statement2))
     results2 = session.exec(statement2).all()
+    for result in results2:
+        result.taxpayerID = taxpayerID
     print("results2: " + str(results2))
 
 

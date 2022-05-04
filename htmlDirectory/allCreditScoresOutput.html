@@ -85,6 +85,13 @@ body {
     font-weight: bold;
 }
 
+.phone {
+    padding: 5px;
+    text-align: center;
+    color: black;
+    background-color: darkkhaki;
+    font-weight: bold;
+}
 
 </style>
 <body>
@@ -100,6 +107,7 @@ body {
             <th class="last_name">Last Name</th>
             <th class="taxpayerID">Taxpayer ID</th>
             <th class="creditScore">Credit Score</th>
+            <th class="phone">Phone</th>
 
         {% for result in results %}
             <tr>
@@ -108,6 +116,7 @@ body {
                 <td>{{result.last_name}}</td>
                 <td>{{result.taxpayerID}}</td>
                 <td>{{result.creditScore}}</td>
+                <td>{{result.phone}}</td>
             </tr>
         {% endfor %}
 
