@@ -426,18 +426,21 @@ def create_bank(request: Request, customerID: int = Form(...), taxpayerID: int =
     print("customerID: " + str(customerID) + ", taxpayerID :" + str(taxpayerID) + ", number_late_payments:" + str(number_late_payments) + ", average_number_days_late:" + str(average_number_days_late), "bank: " + str(bank))
     new_paymentHistory = PaymentHistory(taxpayerID=taxpayerID, number_late_payments=number_late_payments, average_number_days_late=average_number_days_late, bank=bank)
     session.add(new_paymentHistory)
-    session.commit()
-    print("Successfully made a new Payment History record!")
-    statement = select(PaymentHistory).where(PaymentHistory.taxpayerID == taxpayerID)
-    results=session.exec(statement).all()
 
-    #statement2 = select(Customer).where(Customer.taxpayerID == taxpayerID)
+    # statement2 = select(Customer).where(Customer.taxpayerID == taxpayerID)
     statement2 = select(Customer).where(Customer.customer_ID == customerID)
     print("statement2: " + str(statement2))
     results2 = session.exec(statement2).all()
     for result in results2:
         result.taxpayerID = taxpayerID
     print("results2: " + str(results2))
+
+    session.commit()
+    print("Successfully made a new Payment History record!")
+    statement = select(PaymentHistory).where(PaymentHistory.taxpayerID == taxpayerID)
+    results=session.exec(statement).all()
+
+
 
 
     return templates.TemplateResponse("allPaymentHistoriesOutput.html", {"request": request, "results": results, "results2": results2})
@@ -574,8 +577,11 @@ def get_bank(request: Request, bankAcct: int):
 
 
 @app.post("/createCarPurchase", response_class=HTMLResponse)
-def create_bank(request: Request, taxID: int = Form(...), date: str = Form(...),location: str = Form(...), auction: str = Form(...), seller_dealer: str = Form(...), VIN: int = Form(...), make: str = Form(...), model: str = Form(...), year: str = Form(...), color: str = Form(...), miles: str = Form(...), book_price: int = Form(...), price_paid: int = Form(...),car_problem_number: int = Form(...), problem_description: str = Form(...), est_repair_cost: int = Form(...)):
-    print("taxID :" + str(taxID) + ", location:" + str(location) + ", auction:" + str(auction) + "seller_dealer :" + str(seller_dealer) + ", VIN:" + str(VIN) + ", make:" + str(make) + "model :" + str(model) + ", year:" + str(year) + ", color:" + str(color) + "miles :" + str(miles))
+def create_bank(request: Request, taxID: int = Form(...), date: str = Form(...),location: str = Form(...), auction: str = Form(...), seller_dealer: str = Form(...),
+                VIN: int = Form(...), make: str = Form(...), model: str = Form(...), year: str = Form(...), color: str = Form(...), miles: str = Form(...), book_price: int = Form(...),
+                price_paid: int = Form(...),car_problem_number: int = Form(...), problem_description: str = Form(...), est_repair_cost: int = Form(...)):
+    print("taxID :" + str(taxID) + ", location:" + str(location) + ", auction:" + str(auction) + "seller_dealer :" + str(seller_dealer) + ", VIN:" + str(VIN) +
+          ", make:" + str(make) + "model :" + str(model) + ", year:" + str(year) + ", color:" + str(color) + "miles :" + str(miles))
     new_purchaser = Purchaser(taxID=taxID, date=date, location=location, auction=auction, seller_dealer=seller_dealer, VIN=VIN)
     new_purchasedCar = PurchasedCar(VIN=VIN, make=make, model=model, year=year, color=color, miles=miles, book_price=book_price, price_paid=price_paid)
 
